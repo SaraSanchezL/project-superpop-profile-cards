@@ -1,1 +1,16 @@
 /* Mis estilos para App */
+@import "core/variables";
+@import "core/reset";
+@import "core/global";
+@import "core/palette";
+@import "layout/_main-cards";
+@import "layout/page";
+@import "layout/header";
+@import "layout/share";
+@import "layout/footer";
+@import "layout/card-section";
+@import "pages/design-cards";
+@import "components/legend";
+@import "components/design";
+@import "components/form-section";
+@import "components/fill";

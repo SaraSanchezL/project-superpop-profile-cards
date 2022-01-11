@@ -1,0 +1,14 @@
+.form-section {
+  background-image: linear-gradient(
+      to bottom,
+      rgb(121, 151, 190),
+      rgb(74, 120, 207) 50%
+    );
+  //background-image: linear-gradient(to bottom, $white-four, $white 9%);
+  padding: 27px 20px 30px;
+  @media (min-width: 768px) {
+    width: 50%;
+    background-image: none;
+    padding-right: 30px;
+  }
+}

@@ -1,0 +1,64 @@
+//RECTANGULO
+.rectangleblue {
+  background-color: $dirty-blue;
+}
+.rectanglered {
+  background-color: $red;
+}
+
+.rectanglemix {
+  background-color: $yellow;
+}
+
+//NOMBRE Y APELLIDOS
+
+.nameblue {
+  color: $color-primary-blue;
+}
+
+.namered {
+  color: $dried-blood;
+}
+.namemix {
+  color: $slate;
+}
+
+//CIRCULOS ICONOS
+
+.blueiconcircle {
+  border: 3px solid $green;
+  transition: background-color ease 0.5s;
+  &:hover {
+    background-color: $green;
+  }
+}
+
+.rediconcircle {
+  border: 3px solid $tomato;
+  transition: background-color ease 0.5s;
+  &:hover {
+    background-color: $tomato;
+  }
+}
+
+.mixiconcircle {
+  border: 3px solid $sky-blue;
+  transition: background-color ease 0.5s;
+  &:hover {
+    background-color: $sky-blue;
+  }
+}
+
+//iconos
+
+.blueicon {
+  color: $color-primary-blue;
+}
+
+.redicon {
+  color: $dried-blood;
+}
+
+.mixicon {
+  color: $slate;
+}

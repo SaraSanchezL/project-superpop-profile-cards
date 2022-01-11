@@ -1,0 +1,50 @@
+.legend {
+  border-bottom: solid $white-two 1px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 10px;
+  }
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &--icon {
+      display: flex;
+
+      .legend__icon {
+        fill: $color-primary;
+        height: 18px;
+        margin-right: 10px;
+      }
+      .legend__title {
+        font-family: $primary-font-family;
+        font-weight: 600;
+        font-size: 1.8rem;
+        // color: $color-font-primary;
+        color: yellow;
+        text-transform: uppercase;
+        display: inline;
+      }
+    }
+  }
+  &__arrow {
+    height: 18px;
+    width: 16px;
+    color: $color-font-primary;
+    cursor: pointer;
+    transition: transform 0.4s;
+    &--up {
+      transform: rotate(180deg);
+    }
+  }
+
+  .collapsed {
+    display: none;
+  }
+}

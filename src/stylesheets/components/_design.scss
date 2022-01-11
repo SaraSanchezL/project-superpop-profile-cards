@@ -1,0 +1,63 @@
+.design-container {
+  width: 100%;
+  margin: 22px 0 30px;
+  display: flex;
+  justify-content: space-between;
+
+  .design__title {
+    font-family: $primary-font-family;
+    // color: $color-font-primary;
+    color: rgb(253, 0, 118);
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    padding-left: 19px;
+  }
+  .design__label {
+    display: flex;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .design__radio {
+      margin-right: 10px;
+      width: 17px;
+      height: 17px;
+    }
+
+    .design__color {
+      width: 30px;
+      height: 25px;
+
+      &--primary-blue {
+        background-color: $color-primary-blue;
+      }
+      &--dirty-blue {
+        background-color: $dirty-blue;
+      }
+      &--green {
+        background-color: $green;
+      }
+      &--dried-blood {
+        background-color: $dried-blood;
+      }
+      &--red {
+        background-color: $red;
+      }
+      &--tomato {
+        background-color: $tomato;
+      }
+      &--slate {
+        background-color: $slate;
+      }
+      &--yellow {
+        background-color: $yellow;
+      }
+      &--sky-blue {
+        background-color: $sky-blue;
+      }
+    }
+  }
+}
