@@ -22,6 +22,16 @@ function App() {
         ...data,
         name: event.currentTarget.value,
       });
+    } else if (inputChange === "linkedin") {
+      setData({
+        ...data,
+        linkedin: event.currentTarget.value,
+      });
+    } else if (inputChange === "github") {
+      setData({
+        ...data,
+        github: event.currentTarget.value,
+      });
     }
   };
 
@@ -87,7 +97,7 @@ function App() {
                 </li>
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle">
-                    <a href="./#" className="js-linkedin-link" target="_blank">
+                    <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
                         className="fab fa-linkedin-in card__list--icon-1 cardicon-js blueicon"
                         aria-hidden="true"
@@ -97,7 +107,7 @@ function App() {
                 </li>
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle ">
-                    <a href="./#" className="js-github-link" target="_blank">
+                    <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
                         className="fab fa-github-alt card__list--icon-1 cardicon-js blueicon"
                         aria-hidden="true"
@@ -261,6 +271,7 @@ function App() {
                   name="linkedin"
                   id="linkedin"
                   placeholder="Ej.: linkedin.com/in/sally.hill"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="github">
@@ -271,6 +282,7 @@ function App() {
                   name="github"
                   id="github"
                   placeholder="Ej.: @sally-hill"
+                  onChange={handleInput}
                 />
               </label>
             </div>
@@ -371,5 +383,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
