@@ -22,6 +22,13 @@ function App() {
         ...data,
         name: event.currentTarget.value,
       });
+    } else if (inputChange === "job") {
+      setData({
+        ...data,
+        job: event.currentTarget.value,
+      });
+    
+    
     }
   };
 
@@ -57,7 +64,9 @@ function App() {
                   <h3 className="name nameblue js-nameInput fullname-js">
                     {data.name || 'nombre y apellidos'}
                   </h3>
-                  <h4 className="subtitle js-jobInput">Front-end developer</h4>
+                  <h4 className="subtitle js-jobInput">
+                   {data.job || 'Front-end Developer'}
+                  </h4>
                 </div>
               </div>
               <div className="card__photo profile__preview js__profile-preview"></div>
@@ -87,7 +96,7 @@ function App() {
                 </li>
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle">
-                    <a href="./#" className="js-linkedin-link" target="_blank">
+                    <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
                         className="fab fa-linkedin-in card__list--icon-1 cardicon-js blueicon"
                         aria-hidden="true"
@@ -97,7 +106,7 @@ function App() {
                 </li>
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle ">
-                    <a href="./#" className="js-github-link" target="_blank">
+                    <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
                         className="fab fa-github-alt card__list--icon-1 cardicon-js blueicon"
                         aria-hidden="true"
@@ -114,20 +123,30 @@ function App() {
           <fieldset className="legend">
             <div className="js-legend legend__container">
               <div className="legend__container--icon">
-                <img
+                {/* <img
                   className="legend__icon"
                   src="./assets/images/design-icon.svg"
                   alt="icono de diseño"
                   title="diseña tu tarjeta"
-                />
+                /> */}
+                <i className="legend__icon far fa-object-ungroup icon" 
+                alt="icono de diseño"
+                title="diseña tu tarjeta">
+                </i>
                 <legend className="legend__title">diseña</legend>
               </div>
-              <img
+              {/* <img
                 className="legend__arrow"
                 src="./assets/images/arrow-icon.svg"
                 alt="arrow"
                 title="Click to open"
-              />
+              /> */}
+               <i
+                title="Pulsa para desplegar"
+                className="legend__arrow fas fa-chevron-down"
+                alt="arrow"
+                title="Click to open">
+              </i>
             </div>
             <div className="design-container js-container">
               <h4 className="design__title">Colores</h4>
@@ -178,20 +197,25 @@ function App() {
           <fieldset className="legend">
             <div className="js-legend legend__container">
               <div className="legend__container--icon">
-                <img
+                {/* <img
                   className="legend__icon"
                   src="./assets/images/fill-icon.svg"
                   alt="icono de relleno"
                   title="Rellena tu tarjeta"
-                />
+                /> */}
+                <i class="legend__icon far fa-keyboard icon" alt="icono de relleno" title="Rellena tu tarjeta" ></i>
                 <legend className="legend__title">Rellena</legend>
               </div>
-              <img
+              {/* <img
                 className="legend__arrow"
                 src="./assets/images/arrow-icon.svg"
                 alt="arrow"
                 title="Click to open"
-              />
+              /> */}
+               <i
+              title="Pulsa para desplegar"
+              className="legend__arrow fas fa-chevron-down" alt="arrow" title="Click to open">
+              </i>
             </div>
             <div className="fill-container">
               <label className="fill__label" htmlFor="name">
@@ -261,6 +285,7 @@ function App() {
                   name="linkedin"
                   id="linkedin"
                   placeholder="Ej.: linkedin.com/in/sally.hill"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="github">
@@ -271,6 +296,7 @@ function App() {
                   name="github"
                   id="github"
                   placeholder="Ej.: @sally-hill"
+                  onChange={handleInput}
                 />
               </label>
             </div>
@@ -279,20 +305,27 @@ function App() {
           <fieldset className="legend">
             <div className="js-legend legend__container">
               <div className="legend__container--icon">
-                <img
+                {/* <img
                   className="legend__icon"
                   src="./assets/images/share-icon.svg"
                   alt="icono de compartir"
                   title="Comparte tu tarjeta"
-                />
+                /> */}
+                <i className="legend__icon far fa-address-card" alt="icono de compartir" title="Comparte tu tarjeta">
+                </i>
                 <legend className="legend__title">Comparte</legend>
               </div>
-              <img
+              {/* <img
                 className="legend__arrow"
                 src="./assets/images/arrow-icon.svg"
                 alt="arrow"
                 title="Click to open"
-              />
+              /> */}
+              <i
+              className="legend__arrow fas fa-chevron-down"
+              alt="arrow"
+              title="Click to open">
+              </i>
             </div>
             <div className="sharecontainer collapsed">
               <section className="share_button">
@@ -364,12 +397,13 @@ function App() {
         <h6 className="page__footer--title">Tarjetas super molonas @2021</h6>
         <img
           className="page__footer--logo"
-          src="./assets/images/superpop-logo.png"
+          src={superPopLogo}
           alt="Logo de SuperPop"
         />
       </footer>
     </div>
   );
 }
+
 
 export default App;
