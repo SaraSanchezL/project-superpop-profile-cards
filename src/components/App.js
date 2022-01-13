@@ -203,7 +203,7 @@ function App() {
                   alt="icono de relleno"
                   title="Rellena tu tarjeta"
                 /> */}
-                <i class="legend__icon far fa-keyboard icon" alt="icono de relleno" title="Rellena tu tarjeta" ></i>
+                <i className="legend__icon far fa-keyboard icon" alt="icono de relleno" title="Rellena tu tarjeta" ></i>
                 <legend className="legend__title">Rellena</legend>
               </div>
               {/* <img
