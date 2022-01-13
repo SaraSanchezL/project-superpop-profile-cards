@@ -22,6 +22,78 @@ function App() {
     })
   };
 
+  const handleReset = () => {
+    setData({
+      palette: "1",
+      name: "",
+      job: "",
+      email: "",
+      phone: "",
+      linkedin: "",
+      github: ""
+    });
+  }
+  const [collapsableOpen, setCollapsableOpen] = useState(false);
+
+  const handleCollapsable = () => {
+    setCollapsableOpen(!collapsableOpen);
+  };
+
+  const renderPaletteForm = () => {
+    if (collapsableOpen === true) {
+      return (
+        <>
+          <h4 className="design__title">Colores</h4>
+          <div className="options-container">
+            <label className="design__label" htmlFor="blue-green">
+              <input
+                className="design__radio"
+                type="radio"
+                name="palette"
+                id="blue-green"
+                value="1"
+                checked={data.palette === "1"}
+                onChange={handleInput}
+              />
+              <div className="design__color design__color--primary-blue"></div>
+              <div className="design__color design__color--dirty-blue"></div>
+              <div className="design__color design__color--green"></div>
+            </label>
+
+            <label className="design__label" htmlFor="red-orange">
+              <input
+                className="design__radio"
+                type="radio"
+                name="palette"
+                id="red-orange"
+                value="2"
+                checked={data.palette === "2"}
+                onChange={handleInput}
+              />
+              <div className="design__color design__color--dried-blood"></div>
+              <div className="design__color design__color--red"></div>
+              <div className="design__color design__color--tomato"></div>
+            </label>
+
+            <label className="design__label" htmlFor="color-mix">
+              <input
+                className="design__radio"
+                type="radio"
+                name="palette"
+                id="color-mix"
+                value="3"
+                checked={data.palette === "3"}
+                onChange={handleInput}
+              />
+              <div className="design__color design__color--slate"></div>
+              <div className="design__color design__color--yellow"></div>
+              <div className="design__color design__color--sky-blue"></div>
+            </label>
+          </div>
+        </>);
+    }
+  }
+
   return (
     <div className="App">
       <header className="header">
@@ -41,6 +113,7 @@ function App() {
               className="reset__button js-resetBtn"
               type="reset"
               form="form"
+              onClick={handleReset}
             >
               <span className="reset__button--icon">
                 <img src={trashRegular} alt="Icono de Papelera" />
@@ -111,7 +184,7 @@ function App() {
 
         <form className="form-section" action="" id="form">
           <fieldset className="legend">
-            <div className="js-legend legend__container">
+            <div className="js-legend legend__container" onClick={handleCollapsable}>
               <div className="legend__container--icon">
                 {/* <img
                   className="legend__icon"
@@ -139,7 +212,8 @@ function App() {
               </i>
             </div>
             <div className="design-container js-container">
-              <h4 className="design__title">Colores</h4>
+              {renderPaletteForm()}
+              {/* <h4 className="design__title">Colores</h4>
               <div className="options-container">
                 <label className="design__label" htmlFor="blue-green">
                   <input
@@ -185,7 +259,7 @@ function App() {
                   <div className="design__color design__color--yellow"></div>
                   <div className="design__color design__color--sky-blue"></div>
                 </label>
-              </div>
+              </div> */}
             </div>
           </fieldset>
 
