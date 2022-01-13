@@ -49,56 +49,56 @@ function App() {
             </button>
             <article className="card">
               <div className="card__title">
-                <div className="card__title--rectangle rectangle-js rectangleblue"></div>
+                <div className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}></div>
                 <div className="card__title--text">
-                  <h3 className="name nameblue js-nameInput fullname-js">
+                  <h3 className={`name name-${data.palette} js-nameInput fullname-js`}>
                     {data.name || 'nombre y apellidos'}
                   </h3>
                   <h4 className="subtitle js-jobInput">
-                   {data.job || 'Front-end Developer'}
+                    {data.job || 'Front-end Developer'}
                   </h4>
                 </div>
               </div>
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`tel:${data.phone}` || "/"}>
                       <i
-                        className="fas fa-mobile-alt card__list--icon-1 cardicon-js blueicon"
+                        className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a
                       href={`mailto:${data.email || "mailto:email@email.com"}`}
                       className="js_preview_email card__list--icon-1"
                     >
                       <i
-                        className="far fa-envelope cardicon-js blueicon"
+                        className={`far fa-envelope cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
-                        className="fab fa-linkedin-in card__list--icon-1 cardicon-js blueicon"
+                        className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
-                        className="fab fa-github-alt card__list--icon-1 cardicon-js blueicon"
+                        className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
@@ -119,9 +119,9 @@ function App() {
                   alt="icono de diseño"
                   title="diseña tu tarjeta"
                 /> */}
-                <i className="legend__icon far fa-object-ungroup icon" 
-                alt="icono de diseño"
-                title="diseña tu tarjeta">
+                <i className="legend__icon far fa-object-ungroup icon"
+                  alt="icono de diseño"
+                  title="diseña tu tarjeta">
                 </i>
                 <legend className="legend__title">diseña</legend>
               </div>
@@ -131,7 +131,7 @@ function App() {
                 alt="arrow"
                 title="Click to open"
               /> */}
-               <i
+              <i
                 title="Pulsa para desplegar"
                 className="legend__arrow fas fa-chevron-down"
                 alt="arrow"
@@ -207,9 +207,9 @@ function App() {
                 alt="arrow"
                 title="Click to open"
               /> */}
-               <i
-              title="Pulsa para desplegar"
-              className="legend__arrow fas fa-chevron-down" alt="arrow" title="Click to open">
+              <i
+                title="Pulsa para desplegar"
+                className="legend__arrow fas fa-chevron-down" alt="arrow" title="Click to open">
               </i>
             </div>
             <div className="fill-container">
@@ -320,9 +320,9 @@ function App() {
                 title="Click to open"
               /> */}
               <i
-              className="legend__arrow fas fa-chevron-down"
-              alt="arrow"
-              title="Click to open">
+                className="legend__arrow fas fa-chevron-down"
+                alt="arrow"
+                title="Click to open">
               </i>
             </div>
             <div className="sharecontainer collapsed">
