@@ -13,6 +13,7 @@ function App() {
     linkedin: "",
     github: "",
   });
+  console.log(data);
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
@@ -22,8 +23,17 @@ function App() {
         ...data,
         name: event.currentTarget.value,
       });
-    }
+    } 
   };
+
+  const handleCheck = (event) => {
+
+      setData({
+        ...data,
+        palette: parseInt(event.currentTarget.value),
+      });
+    
+  }
 
   return (
     <div className="App">
@@ -139,7 +149,8 @@ function App() {
                     name="color-palet"
                     id="blue-green"
                     value="1"
-                    checked=""
+                    checked={data.palette === parseInt("1")}
+                    onChange={handleCheck}
                   />
                   <div className="design__color design__color--primary-blue"></div>
                   <div className="design__color design__color--dirty-blue"></div>
@@ -153,6 +164,8 @@ function App() {
                     name="color-palet"
                     id="red-orange"
                     value="2"
+                    checked={data.palette === parseInt("2")}
+                    onChange={handleCheck}
                   />
                   <div className="design__color design__color--dried-blood"></div>
                   <div className="design__color design__color--red"></div>
@@ -166,6 +179,8 @@ function App() {
                     name="color-palet"
                     id="color-mix"
                     value="3"
+                    checked={data.palette === parseInt("3")}
+                    onChange={handleCheck}
                   />
                   <div className="design__color design__color--slate"></div>
                   <div className="design__color design__color--yellow"></div>
