@@ -16,20 +16,10 @@ function App() {
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
-
-    if (inputChange === "name") {
-      setData({
-        ...data,
-        name: event.currentTarget.value,
-      });
-    } else if (inputChange === "job") {
-      setData({
-        ...data,
-        job: event.currentTarget.value,
-      });
-    
-    
-    }
+    setData({
+      ...data,
+      [inputChange]: event.currentTarget.value,
+    })
   };
 
   return (
@@ -73,7 +63,7 @@ function App() {
               <ul className="card__list">
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle ">
-                    <a href="/">
+                    <a href={`tel:${data.phone}` || "/"}>
                       <i
                         className="fas fa-mobile-alt card__list--icon-1 cardicon-js blueicon"
                         aria-hidden="true"
@@ -84,7 +74,7 @@ function App() {
                 <li>
                   <div className="card__list--icon icon-js blueiconcircle ">
                     <a
-                      href="mailto:email@email.com"
+                      href={`mailto:${data.email || "mailto:email@email.com"}`}
                       className="js_preview_email card__list--icon-1"
                     >
                       <i
@@ -266,6 +256,7 @@ function App() {
                   name="email"
                   id="email"
                   placeholder="Ej.: sally-hill@gmail.com"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="phone">
@@ -276,6 +267,7 @@ function App() {
                   name="phone"
                   id="phone"
                   placeholder="Ej.: 555-555-555"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="linkedin">
