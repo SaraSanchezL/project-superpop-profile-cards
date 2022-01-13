@@ -237,6 +237,7 @@ function App() {
                   name="job"
                   id="job"
                   placeholder="Ej.: Front-end unicorn"
+                  onChange={handleInput}
                 />
               </label>
               <div className="fill__label" htmlFor="profilePic">
