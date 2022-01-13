@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function App() {
   const [data, setData] = useState({
-    palette: 1,
+    palette: "1",
     name: "",
     job: "",
     email: "",
@@ -145,10 +145,11 @@ function App() {
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="blue-green"
                     value="1"
-                    checked=""
+                    checked={data.palette === "1"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--primary-blue"></div>
                   <div className="design__color design__color--dirty-blue"></div>
@@ -159,9 +160,11 @@ function App() {
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="red-orange"
                     value="2"
+                    checked={data.palette === "2"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--dried-blood"></div>
                   <div className="design__color design__color--red"></div>
@@ -172,9 +175,11 @@ function App() {
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="color-mix"
                     value="3"
+                    checked={data.palette === "3"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--slate"></div>
                   <div className="design__color design__color--yellow"></div>
