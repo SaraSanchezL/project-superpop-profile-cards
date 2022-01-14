@@ -1,11 +1,17 @@
-import superPopLogo from "../images/superpop-logo.png";
-import trashRegular from "../images/trash-alt-regular.svg";
 import "../stylesheets/App.scss";
 import { useState } from "react";
+//Imagenes
+import superPopLogo from "../images/superpop-logo.png";
+import trashRegular from "../images/trash-alt-regular.svg";
+import shareIconCard from "../images/address-card-regular (2).svg"
+import imgShareTwitter from "../images/twitter.svg";
+import imgShareLinkedin from "../images/linkedin.svg"
+import imgShareFacebook from "../images/facebook.svg"
+
 
 function App() {
   const [data, setData] = useState({
-    palette: 1,
+    palette: "1",
     name: "",
     job: "",
     email: "",
@@ -13,27 +19,42 @@ function App() {
     linkedin: "",
     github: "",
   });
-  console.log(data);
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
-
-    if (inputChange === "name") {
-      setData({
-        ...data,
-        name: event.currentTarget.value,
-      });
-    } 
+    setData({
+      ...data,
+      [inputChange]: event.currentTarget.value,
+    })
   };
 
-  const handleCheck = (event) => {
-
-      setData({
-        ...data,
-        palette: parseInt(event.currentTarget.value),
-      });
-    
+  const handleReset = () => {
+    setData({
+      palette: "1",
+      name: "",
+      job: "",
+      email: "",
+      phone: "",
+      linkedin: "",
+      github: ""
+    });
   }
+ 
+  const [collapsablePalette, setcollapsablePalette] = useState(false);
+  const [collapsableFill, setcollapsableFill] = useState(true);
+  const [collapsableShare, setcollapsableShare] = useState(true);
+
+
+  const handleCollapsable = (ev) => {
+    const oneID = ev.currentTarget.id;
+    if (oneID === "legend-design") {
+      setcollapsablePalette(!collapsablePalette);
+    } else if (oneID === "legend-fill") {
+    setcollapsableFill(!collapsableFill);
+  } else if(oneID === "legend-share"){
+    setcollapsableShare(!collapsableShare)
+  }
+  };
 
   return (
     <div className="App">
@@ -54,6 +75,7 @@ function App() {
               className="reset__button js-resetBtn"
               type="reset"
               form="form"
+              onClick={handleReset}
             >
               <span className="reset__button--icon">
                 <img src={trashRegular} alt="Icono de Papelera" />
@@ -62,54 +84,56 @@ function App() {
             </button>
             <article className="card">
               <div className="card__title">
-                <div className="card__title--rectangle rectangle-js rectangleblue"></div>
+                <div className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}></div>
                 <div className="card__title--text">
-                  <h3 className="name nameblue js-nameInput fullname-js">
+                  <h3 className={`name name-${data.palette} js-nameInput fullname-js`}>
                     {data.name || 'nombre y apellidos'}
                   </h3>
-                  <h4 className="subtitle js-jobInput">Front-end developer</h4>
+                  <h4 className="subtitle js-jobInput">
+                    {data.job || 'Front-end Developer'}
+                  </h4>
                 </div>
               </div>
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
-                    <a href="/">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
+                    <a href={`tel:${data.phone}` || "/"}>
                       <i
-                        className="fas fa-mobile-alt card__list--icon-1 cardicon-js blueicon"
+                        className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a
-                      href="mailto:email@email.com"
+                      href={`mailto:${data.email || "mailto:email@email.com"}`}
                       className="js_preview_email card__list--icon-1"
                     >
                       <i
-                        className="far fa-envelope cardicon-js blueicon"
+                        className={`far fa-envelope cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle">
-                    <a href="./#" className="js-linkedin-link" target="_blank">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
+                    <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
-                        className="fab fa-linkedin-in card__list--icon-1 cardicon-js blueicon"
+                        className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
                 </li>
                 <li>
-                  <div className="card__list--icon icon-js blueiconcircle ">
-                    <a href="./#" className="js-github-link" target="_blank">
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
+                    <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
-                        className="fab fa-github-alt card__list--icon-1 cardicon-js blueicon"
+                        className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
@@ -122,35 +146,32 @@ function App() {
 
         <form className="form-section" action="" id="form">
           <fieldset className="legend">
-            <div className="js-legend legend__container">
+            <div className="js-legend legend__container" id="legend-design" onClick={handleCollapsable}>
               <div className="legend__container--icon">
-                <img
-                  className="legend__icon"
-                  src="./assets/images/design-icon.svg"
+                <i className="legend__icon far fa-object-ungroup icon"
                   alt="icono de diseño"
-                  title="diseña tu tarjeta"
-                />
+                  title="diseña tu tarjeta">
+                </i>
                 <legend className="legend__title">diseña</legend>
               </div>
-              <img
-                className="legend__arrow"
-                src="./assets/images/arrow-icon.svg"
-                alt="arrow"
-                title="Click to open"
-              />
+              <i
+                title="Pulsa para desplegar"
+                className={`legend__arrow fas ${collapsablePalette ? 'fa-chevron-down': 'fa-chevron-up'}`}
+                alt="arrow">
+              </i>
             </div>
-            <div className="design-container js-container">
+            <div className={`design-container js-container ${collapsablePalette ? 'collapsed' : ''}`}>
               <h4 className="design__title">Colores</h4>
               <div className="options-container">
                 <label className="design__label" htmlFor="blue-green">
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="blue-green"
                     value="1"
-                    checked={data.palette === parseInt("1")}
-                    onChange={handleCheck}
+                    checked={data.palette === "1"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--primary-blue"></div>
                   <div className="design__color design__color--dirty-blue"></div>
@@ -161,11 +182,11 @@ function App() {
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="red-orange"
                     value="2"
-                    checked={data.palette === parseInt("2")}
-                    onChange={handleCheck}
+                    checked={data.palette === "2"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--dried-blood"></div>
                   <div className="design__color design__color--red"></div>
@@ -176,11 +197,11 @@ function App() {
                   <input
                     className="design__radio"
                     type="radio"
-                    name="color-palet"
+                    name="palette"
                     id="color-mix"
                     value="3"
-                    checked={data.palette === parseInt("3")}
-                    onChange={handleCheck}
+                    checked={data.palette === "3"}
+                    onChange={handleInput}
                   />
                   <div className="design__color design__color--slate"></div>
                   <div className="design__color design__color--yellow"></div>
@@ -191,24 +212,17 @@ function App() {
           </fieldset>
 
           <fieldset className="legend">
-            <div className="js-legend legend__container">
+            <div className="js-legend legend__container" id="legend-fill" onClick={handleCollapsable}>
               <div className="legend__container--icon">
-                <img
-                  className="legend__icon"
-                  src="./assets/images/fill-icon.svg"
-                  alt="icono de relleno"
-                  title="Rellena tu tarjeta"
-                />
+                <i className="legend__icon far fa-keyboard icon" alt="icono de relleno" title="Rellena tu tarjeta" ></i>
                 <legend className="legend__title">Rellena</legend>
               </div>
-              <img
-                className="legend__arrow"
-                src="./assets/images/arrow-icon.svg"
-                alt="arrow"
-                title="Click to open"
-              />
+              <i
+                title="Pulsa para desplegar"
+                className={`legend__arrow fas ${collapsableFill ? 'fa-chevron-down' : 'fa-chevron-up'}`} alt="arrow">
+              </i>
             </div>
-            <div className="fill-container">
+            <div className={`fill-container ${collapsableFill ? 'collapsed' : ''}`}>
               <label className="fill__label" htmlFor="name">
                 Nombre completo
                 <input
@@ -228,6 +242,7 @@ function App() {
                   name="job"
                   id="job"
                   placeholder="Ej.: Front-end unicorn"
+                  onChange={handleInput}
                 />
               </label>
               <div className="fill__label" htmlFor="profilePic">
@@ -256,6 +271,7 @@ function App() {
                   name="email"
                   id="email"
                   placeholder="Ej.: sally-hill@gmail.com"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="phone">
@@ -266,6 +282,7 @@ function App() {
                   name="phone"
                   id="phone"
                   placeholder="Ej.: 555-555-555"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="linkedin">
@@ -276,6 +293,7 @@ function App() {
                   name="linkedin"
                   id="linkedin"
                   placeholder="Ej.: linkedin.com/in/sally.hill"
+                  onChange={handleInput}
                 />
               </label>
               <label className="fill__label" htmlFor="github">
@@ -286,39 +304,36 @@ function App() {
                   name="github"
                   id="github"
                   placeholder="Ej.: @sally-hill"
+                  onChange={handleInput}
                 />
-              </label>
+            </label>
             </div>
           </fieldset>
 
           <fieldset className="legend">
-            <div className="js-legend legend__container">
+            <div className="js-legend legend__container" id="legend-share" onClick={handleCollapsable}>
               <div className="legend__container--icon">
-                <img
-                  className="legend__icon"
-                  src="./assets/images/share-icon.svg"
-                  alt="icono de compartir"
-                  title="Comparte tu tarjeta"
-                />
+                <i className="legend__icon far fa-address-card icon" alt="icono de compartir" title="Comparte tu tarjeta">
+                </i>
                 <legend className="legend__title">Comparte</legend>
               </div>
-              <img
-                className="legend__arrow"
-                src="./assets/images/arrow-icon.svg"
+              <i
+                className={`legend__arrow fas ${collapsableShare ? 'fa-chevron-down' : 'fa-chevron-up'}`}
                 alt="arrow"
-                title="Click to open"
-              />
+                title="Click to open">
+              </i>
             </div>
-            <div className="sharecontainer collapsed">
+            <div className={`sharecontainer ${collapsableShare ? 'collapsed' : ''}`}>
               <section className="share_button">
                 <button
                   type="submit"
-                  className="share_button__item sharebuttonorange"
+                  className="share_button__item sharebuttonorange" disabled
                 >
                   <img
                     className="share_button__item--img"
-                    src="./assets/images/address-card-regular (2).svg"
+                    src={shareIconCard}
                     title="icon"
+                    alt="Comparte"
                   />
                   Crear Tarjeta
                 </button>
@@ -330,6 +345,7 @@ function App() {
                   La tarjeta ha sido creada:
                 </h3>
                 <a
+                 href="./#"
                   target="_blank"
                   className="share_creation__link href js-shareCreationLink"
                   src="https://awesome-profile-card.com?id=A456DF0001"
@@ -344,7 +360,8 @@ function App() {
                 >
                   <img
                     className="share_creation__twitter--img"
-                    src="./assets/images/twitter.svg"
+                    src={imgShareTwitter}
+                    alt="Comparte Twitter"
                   />
                   Compartir en Twitter
                 </a>
@@ -355,7 +372,8 @@ function App() {
                 >
                   <img
                     className="share_creation__linkedin--img"
-                    src="./assets/images/linkedin.svg"
+                    src={imgShareLinkedin}
+                    alt="Comparte Linkedin"
                   />
                   Comparte en LinkedIn
                 </a>
@@ -366,7 +384,8 @@ function App() {
                 >
                   <img
                     className="share_creation__facebook--img"
-                    src="./assets/images/facebook.svg"
+                    src={imgShareFacebook}
+                    alt="Comparte Facebook"
                   />
                   Comparte en Facebook
                 </a>
@@ -379,12 +398,13 @@ function App() {
         <h6 className="page__footer--title">Tarjetas super molonas @2021</h6>
         <img
           className="page__footer--logo"
-          src="./assets/images/superpop-logo.png"
+          src={superPopLogo}
           alt="Logo de SuperPop"
         />
       </footer>
     </div>
   );
 }
+
 
 export default App;
