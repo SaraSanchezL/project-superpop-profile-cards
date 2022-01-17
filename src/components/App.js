@@ -231,6 +231,7 @@ function App() {
                   name="name"
                   id="name"
                   placeholder="Ej.: Sally Jill"
+                  value={data.name}
                   onChange={handleInput}
                 />
               </label>
@@ -242,6 +243,7 @@ function App() {
                   name="job"
                   id="job"
                   placeholder="Ej.: Front-end unicorn"
+                  value={data.job}
                   onChange={handleInput}
                 />
               </label>
@@ -271,6 +273,7 @@ function App() {
                   name="email"
                   id="email"
                   placeholder="Ej.: sally-hill@gmail.com"
+                  value={data.email}
                   onChange={handleInput}
                 />
               </label>
@@ -282,6 +285,7 @@ function App() {
                   name="phone"
                   id="phone"
                   placeholder="Ej.: 555-555-555"
+                  value={data.phone}
                   onChange={handleInput}
                 />
               </label>
@@ -293,6 +297,7 @@ function App() {
                   name="linkedin"
                   id="linkedin"
                   placeholder="Ej.: linkedin.com/in/sally.hill"
+                  value={data.linkedin}
                   onChange={handleInput}
                 />
               </label>
@@ -304,6 +309,7 @@ function App() {
                   name="github"
                   id="github"
                   placeholder="Ej.: @sally-hill"
+                  value={data.github}
                   onChange={handleInput}
                 />
             </label>
