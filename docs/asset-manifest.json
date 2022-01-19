@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "./static/css/main.5b15e559.css",
+    "main.js": "./static/js/main.f3b3ac95.js",
+    "static/media/superpop-logo.png": "./static/media/superpop-logo.a691220f03603d16f658.png",
+    "static/media/twitter.svg": "./static/media/twitter.7e1d72c332c919e7644dd87caccc2422.svg",
+    "index.html": "./index.html",
+    "static/media/address-card-regular (2).svg": "./static/media/address-card-regular (2).630271a686f8a5805a9beb4862f6e14c.svg",
+    "static/media/trash-alt-regular.svg": "./static/media/trash-alt-regular.b76126b1825ea31114644346ede7544f.svg",
+    "static/media/linkedin.svg": "./static/media/linkedin.1b34da50d00cb77745796fccc30e01fc.svg",
+    "static/media/facebook.svg": "./static/media/facebook.d240e51a06fa9956971ff8c219284d36.svg",
+    "main.5b15e559.css.map": "./static/css/main.5b15e559.css.map",
+    "main.f3b3ac95.js.map": "./static/js/main.f3b3ac95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b15e559.css",
+    "static/js/main.f3b3ac95.js"
+  ]
+}
