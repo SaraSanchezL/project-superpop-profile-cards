@@ -7,7 +7,7 @@ import shareIconCard from "../images/address-card-regular (2).svg";
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
-import InputLabel from "./Input-Label";
+import InputLabel from "./InputLabel";
 import ls from "../services/localStorage";
 
 function App() {
