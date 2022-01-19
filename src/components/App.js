@@ -240,7 +240,6 @@ function App() {
                   placeholder="Ej.: Sally Jill"
                   value={data.name}
                   onChange={handleInput}
-                  value={data.name}
                 />
               </label>
               <label className="fill__label" htmlFor="job">
@@ -253,7 +252,6 @@ function App() {
                   placeholder="Ej.: Front-end unicorn"
                   value={data.job}
                   onChange={handleInput}
-                  value={data.job}
                 />
               </label>
               <div className="fill__label" htmlFor="profilePic">
@@ -284,7 +282,6 @@ function App() {
                   placeholder="Ej.: sally-hill@gmail.com"
                   value={data.email}
                   onChange={handleInput}
-                  value={data.email}
                 />
               </label>
               <label className="fill__label" htmlFor="phone">
@@ -297,7 +294,6 @@ function App() {
                   placeholder="Ej.: 555-555-555"
                   value={data.phone}
                   onChange={handleInput}
-                  value={data.phone}
                 />
               </label>
               <label className="fill__label" htmlFor="linkedin">
@@ -310,7 +306,6 @@ function App() {
                   placeholder="Ej.: linkedin.com/in/sally.hill"
                   value={data.linkedin}
                   onChange={handleInput}
-                  value={data.linkedin}
                 />
               </label>
               <label className="fill__label" htmlFor="github">
@@ -323,7 +318,6 @@ function App() {
                   placeholder="Ej.: @sally-hill"
                   value={data.github}
                   onChange={handleInput}
-                  value={data.github}
                 />
             </label>
             </div>
