@@ -1,5 +1,5 @@
 import "../stylesheets/App.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
 import trashRegular from "../images/trash-alt-regular.svg";
@@ -7,10 +7,11 @@ import shareIconCard from "../images/address-card-regular (2).svg"
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg"
 import imgShareFacebook from "../images/facebook.svg"
+import ls from "../services/localStorage"
 
 
 function App() {
-  const [data, setData] = useState({
+  const [data, setData] = useState(ls.get('localData', {
     palette: "1",
     name: "",
     job: "",
@@ -18,7 +19,12 @@ function App() {
     phone: "",
     linkedin: "",
     github: "",
-  });
+    photo: "Photo"
+  }));
+
+  useEffect(() => {
+    ls.set('localData', data)
+  }, [data]);
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
@@ -36,7 +42,8 @@ function App() {
       email: "",
       phone: "",
       linkedin: "",
-      github: ""
+      github: "",
+      photo: "Photo"
     });
   }
  
@@ -233,6 +240,7 @@ function App() {
                   placeholder="Ej.: Sally Jill"
                   value={data.name}
                   onChange={handleInput}
+                  value={data.name}
                 />
               </label>
               <label className="fill__label" htmlFor="job">
@@ -245,6 +253,7 @@ function App() {
                   placeholder="Ej.: Front-end unicorn"
                   value={data.job}
                   onChange={handleInput}
+                  value={data.job}
                 />
               </label>
               <div className="fill__label" htmlFor="profilePic">
@@ -275,6 +284,7 @@ function App() {
                   placeholder="Ej.: sally-hill@gmail.com"
                   value={data.email}
                   onChange={handleInput}
+                  value={data.email}
                 />
               </label>
               <label className="fill__label" htmlFor="phone">
@@ -287,6 +297,7 @@ function App() {
                   placeholder="Ej.: 555-555-555"
                   value={data.phone}
                   onChange={handleInput}
+                  value={data.phone}
                 />
               </label>
               <label className="fill__label" htmlFor="linkedin">
@@ -299,6 +310,7 @@ function App() {
                   placeholder="Ej.: linkedin.com/in/sally.hill"
                   value={data.linkedin}
                   onChange={handleInput}
+                  value={data.linkedin}
                 />
               </label>
               <label className="fill__label" htmlFor="github">
@@ -311,6 +323,7 @@ function App() {
                   placeholder="Ej.: @sally-hill"
                   value={data.github}
                   onChange={handleInput}
+                  value={data.github}
                 />
             </label>
             </div>
