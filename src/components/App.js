@@ -1,5 +1,8 @@
 import "../stylesheets/App.scss";
+import ls from "../services/localStorage"
+import callToApi from '../services/api';
 import { useState, useEffect } from "react";
+
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
 import trashRegular from "../images/trash-alt-regular.svg";
@@ -7,7 +10,7 @@ import shareIconCard from "../images/address-card-regular (2).svg"
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg"
 import imgShareFacebook from "../images/facebook.svg"
-import ls from "../services/localStorage"
+
 
 
 function App() {
@@ -25,6 +28,36 @@ function App() {
   useEffect(() => {
     ls.set('localData', data)
   }, [data]);
+
+  const [cardUrl, setCardUrl] = useState('');
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    callToApi().then(response => {
+      // aquí la funcion renderShare a ver si hay success o  no hay success
+      if (response.success === true) {
+        setCardUrl(response.cardURL);
+      }
+      //   shareCreationLink.href = response.cardURL;
+      //   for (const card of shareCardRrss) {
+      //     card.classList.remove("collapsed");
+      //   }
+      //   shareCreationLink.innerHTML = response.cardURL;
+      //   messageNewCard.innerText = "La tarjeta ha sido creada:";
+      //   twitterHref.href = `https://twitter.com/intent/tweet?text=%C2%A1Comparte%20esta%20tarjeta%20super%20molona%21&url=${response.cardURL}`;
+      //   linkedinHref.href = `https://www.linkedin.com/sharing/share-offsite/?url=${response.cardURL}`;
+      //   facebookHref.href = `http://www.facebook.com/share.php?u=${response.cardURL}`;
+      // } else {
+      //   for (const card of shareCardRrss) {
+      //     card.classList.add("collapsed");
+      //   }
+
+      //   messageNewCard.innerText = "¡Error!";
+      //   shareCreationLink.innerHTML =
+      //     "Por favor, asegúrese de que ha cumplimentado todos los campos.";
+    });
+  }
+
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
@@ -337,11 +370,12 @@ function App() {
               </i>
             </div>
             <div className={`sharecontainer ${collapsableShare ? 'collapsed' : ''}`}>
+
               <section className="share_button">
                 <button
                   type="submit"
-                  className="share_button__item sharebuttonorange" disabled
-                >
+                  className="share_button__item sharebuttonorange"
+                  onClick={handleClick()}>
                   <img
                     className="share_button__item--img"
                     src={shareIconCard}
@@ -349,16 +383,17 @@ function App() {
                     alt="Comparte"
                   />
                   Crear Tarjeta
+
                 </button>
               </section>
-
+              {/* Meter esto en la funcion renderShare() y si la response es success se pinta, si no patata */}
               <section className="share_creation collapsed">
                 <div className="share_button__item--line"></div>
                 <h3 className="share_creation__title">
                   La tarjeta ha sido creada:
                 </h3>
                 <a
-                  href="./#"
+                  href={cardUrl}
                   target="_blank"
                   className="share_creation__link href js-shareCreationLink"
                   src="https://awesome-profile-card.com?id=A456DF0001"
@@ -369,7 +404,7 @@ function App() {
                 <a
                   target="_blank"
                   className="share_creation__twitter js-share-RRSS"
-                  href="./#"
+                  href={`https://twitter.com/intent/tweet?text=%C2%A1Comparte%20esta%20tarjeta%20super%20molona%21&url=${cardUrl}`}
                 >
                   <img
                     className="share_creation__twitter--img"
