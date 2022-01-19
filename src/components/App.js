@@ -10,6 +10,8 @@ import imgShareFacebook from "../images/facebook.svg";
 import InputLabel from "./InputLabel";
 import ls from "../services/localStorage";
 
+import FormFill from "./FormFill";
+
 function App() {
   const [data, setData] = useState(
     ls.get("localData", {
@@ -175,7 +177,8 @@ function App() {
         </section>
 
         <form className="form-section" action="" id="form">
-          <fieldset className="legend">
+          <FormFill />
+          {/* <fieldset className="legend">
             <div
               className="js-legend legend__container"
               id="legend-design"
@@ -250,7 +253,7 @@ function App() {
                 </label>
               </div>
             </div>
-          </fieldset>
+          </fieldset> */}
 
           <fieldset className="legend">
             <div
@@ -268,9 +271,8 @@ function App() {
               </div>
               <i
                 title="Pulsa para desplegar"
-                className={`legend__arrow fas ${
-                  collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
+                className={`legend__arrow fas ${collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
                 alt="arrow"
               ></i>
             </div>
@@ -369,17 +371,15 @@ function App() {
                 <legend className="legend__title">Comparte</legend>
               </div>
               <i
-                className={`legend__arrow fas ${
-                  collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
+                className={`legend__arrow fas ${collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
                 alt="arrow"
                 title="Click to open"
               ></i>
             </div>
             <div
-              className={`sharecontainer ${
-                collapsableShare ? "collapsed" : ""
-              }`}
+              className={`sharecontainer ${collapsableShare ? "collapsed" : ""
+                }`}
             >
               <section className="share_button">
                 <button
