@@ -19,6 +19,7 @@ function App() {
     phone: "",
     linkedin: "",
     github: "",
+    photo: "Photo"
   }));
 
   useEffect(() => {
@@ -41,7 +42,8 @@ function App() {
       email: "",
       phone: "",
       linkedin: "",
-      github: ""
+      github: "",
+      photo: "Photo"
     });
   }
  
