@@ -2,13 +2,15 @@ import "../stylesheets/App.scss";
 import { useState, useEffect } from "react";
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-import trashRegular from "../images/trash-alt-regular.svg";
+
 import shareIconCard from "../images/address-card-regular (2).svg"
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg"
 import imgShareFacebook from "../images/facebook.svg"
 import ls from "../services/localStorage"
 
+import PreviewBtnReset from './PreviewBtnReset';
+import PreviewIcons from "./PreviewIcons";
 
 function App() {
   const [data, setData] = useState(ls.get('localData', {
@@ -78,17 +80,9 @@ function App() {
       <main className="designmain">
         <section className="card-container">
           <div className="container">
-            <button
-              className="reset__button js-resetBtn"
-              type="reset"
-              form="form"
-              onClick={handleReset}
-            >
-              <span className="reset__button--icon">
-                <img src={trashRegular} alt="Icono de Papelera" />
-              </span>
-              <small className="reset__button--reset"> Reset</small>
-            </button>
+
+            <PreviewBtnReset handleReset={handleReset} />
+            
             <article className="card">
               <div className="card__title">
                 <div className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}></div>
@@ -103,7 +97,9 @@ function App() {
               </div>
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
-                <li>
+
+                <PreviewIcons link={`tel:${data.phone}` || "/"} dataPalette={data.palette} className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
                   <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`tel:${data.phone}` || "/"}>
                       <i
@@ -112,8 +108,9 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
+                </li> */}
+                <PreviewIcons link={`mailto:${data.email || "mailto:email@email.com"}`} dataPalette={data.palette} className={`far fa-envelope cardicon-js icon-${data.palette}`}/>
+                {/* <li>
                   <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a
                       href={`mailto:${data.email || "mailto:email@email.com"}`}
@@ -125,8 +122,9 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
+                </li> */}
+                  <PreviewIcons link={`//${data.linkedin}`} dataPalette={data.palette}  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
                   <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
@@ -135,8 +133,9 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
+                </li> */}
+             <PreviewIcons link={`//${data.linkedin}`} dataPalette={data.palette}  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
                   <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
@@ -145,7 +144,7 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </article>
           </div>
