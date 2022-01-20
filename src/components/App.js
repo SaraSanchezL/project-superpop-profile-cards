@@ -6,9 +6,9 @@ import shareIconCard from "../images/address-card-regular (2).svg";
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
-import InputLabel from "./InputLabel";
+import FormFill from "./FormFill";
 import ls from "../services/localStorage";
-import PreviewBtnReset from './PreviewBtnReset';
+import PreviewBtnReset from "./PreviewBtnReset";
 import PreviewIcons from "./PreviewIcons";
 import Preview from "./Preview";
 import FormDesign from "./FormDesign";
@@ -32,11 +32,11 @@ function App() {
     ls.set("localData", data);
   });
 
-  const handleInput = (event) => {
-    const inputChange = event.currentTarget.name;
+  const handleInput = (value,name) => {
+    const inputChange = name;
     setData({
       ...data,
-      [inputChange]: event.currentTarget.value,
+      [inputChange]: value,
     });
   };
 
@@ -70,28 +70,45 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      <Header />
 
       <main className="designmain">
         <section className="card-container">
           <div className="container">
-          <PreviewBtnReset handleReset={handleReset} />
- 
+            <PreviewBtnReset handleReset={handleReset} />
+
             <article className="card">
-            <Preview dataPalette={data.palette} dataName={data.name} dataJob={data.job}/>
-              
+              <Preview
+                dataPalette={data.palette}
+                dataName={data.name}
+                dataJob={data.job}
+              />
+
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
+                <PreviewIcons
+                  link={`tel:${data.phone}` || "/"}
+                  dataPalette={data.palette}
+                  className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
+                />
 
-                <PreviewIcons link={`tel:${data.phone}` || "/"} dataPalette={data.palette} className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
-               
-                <PreviewIcons link={`mailto:${data.email || "mailto:email@email.com"}`} dataPalette={data.palette} className={`far fa-envelope cardicon-js icon-${data.palette}`}/>
-                
-                  <PreviewIcons link={`//${data.linkedin}`} dataPalette={data.palette}  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}/>
-                
-             <PreviewIcons link={`https://github.com/${data.github}`} dataPalette={data.palette}  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
-                
+                <PreviewIcons
+                  link={`mailto:${data.email || "mailto:email@email.com"}`}
+                  dataPalette={data.palette}
+                  className={`far fa-envelope cardicon-js icon-${data.palette}`}
+                />
 
+                <PreviewIcons
+                  link={`//${data.linkedin}`}
+                  dataPalette={data.palette}
+                  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
+                />
+
+                <PreviewIcons
+                  link={`https://github.com/${data.github}`}
+                  dataPalette={data.palette}
+                  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
+                />
               </ul>
             </article>
           </div>
@@ -116,88 +133,16 @@ function App() {
               </div>
               <i
                 title="Pulsa para desplegar"
-                className={`legend__arrow fas ${collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
-                  }`}
+                className={`legend__arrow fas ${
+                  collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
+                }`}
                 alt="arrow"
               ></i>
             </div>
             <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
-              <InputLabel
-                type="text"
-                className="fill__input fill__input-js js-fullname"
-                name="name"
-                id="name"
-                placeholder="Ej.: Sally Jill"
-                label="Nombre Completo"
-                htmlFor="name"
-              />
+              
+              <FormFill handleInput={handleInput()} data={data} />
 
-              <InputLabel
-                type="text"
-                className="fill__input fill__input-js js-job"
-                name="job"
-                id="job"
-                placeholder="Ej.: Front-end unicorn"
-                label="Puesto"
-                htmlFor="job"
-              />
-
-              <div className="fill__label" htmlFor="profilePic">
-                <p className="label__img">Imagen de perfil</p>
-                <label
-                  className="fill__btn js__profile-trigger"
-                  htmlFor="img-selector"
-                >
-                  Añadir imagen
-                </label>
-                <input
-                  className="action__hiddenField js__profile-upload-btn hidden"
-                  type="file"
-                  name="photo"
-                  id="img-selector"
-                />
-                <div className="label__container profile">
-                  <div className="fill__profile-pic profile__image js__profile-image"></div>
-                </div>
-              </div>
-
-              <InputLabel
-                type="email"
-                className="fill__input fill__input-js js-email"
-                name="email"
-                id="email"
-                placeholder="Ej.: sally-hill@gmail.com"
-                label="Email"
-                htmlFor="email"
-              />
-
-              <InputLabel
-                type="tel"
-                className="fill__input fill__input-js js-phone"
-                name="phone"
-                id="phone"
-                placeholder="Ej.: 555-555-555"
-                label="Teléfono"
-                htmlFor="phone"
-              />
-              <InputLabel
-                type="text"
-                className="fill__input fill__input-js js-linkedin"
-                name="linkedin"
-                id="linkedin"
-                placeholder="Ej.: linkedin.com/in/sally.hill"
-                label="Linkedin"
-                htmlFor="linkedin"
-              />
-              <InputLabel
-                type="text"
-                className="fill__input fill__input-js js-github"
-                name="github"
-                id="github"
-                placeholder="Ej.: @sally-hill"
-                label="Github"
-                htmlFor="github"
-              />
             </div>
           </fieldset>
 
@@ -216,15 +161,17 @@ function App() {
                 <legend className="legend__title">Comparte</legend>
               </div>
               <i
-                className={`legend__arrow fas ${collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
-                  }`}
+                className={`legend__arrow fas ${
+                  collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
+                }`}
                 alt="arrow"
                 title="Click to open"
               ></i>
             </div>
             <div
-              className={`sharecontainer ${collapsableShare ? "collapsed" : ""
-                }`}
+              className={`sharecontainer ${
+                collapsableShare ? "collapsed" : ""
+              }`}
             >
               <section className="share_button">
                 <button
@@ -308,6 +255,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
