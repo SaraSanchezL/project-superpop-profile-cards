@@ -83,6 +83,10 @@ function App() {
           dataPalette={data.palette}
           dataName={data.name}
           dataJob={data.job}
+          dataEmail={data.email}
+          dataPhone={data.phone}
+          dataLinkedin={data.linkedin}
+          dataGithub={data.github}
         />
 
         <form className="form-section" action="" id="form">
