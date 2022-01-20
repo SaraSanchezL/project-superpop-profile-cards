@@ -11,8 +11,7 @@ import ls from "../services/localStorage";
 import PreviewBtnReset from './PreviewBtnReset';
 import PreviewIcons from "./PreviewIcons";
 import Preview from "./Preview";
-
-import FormFill from "./FormFill";
+import FormDesign from "./FormDesign";
 
 function App() {
   const [data, setData] = useState(
@@ -31,7 +30,7 @@ function App() {
   useEffect(() => {
     ls.set("localData", data);
 
-
+  });
 
 
 // function App() {
@@ -179,13 +178,15 @@ function App() {
                     </a>
                   </div>
                 </li> */}
+
               </ul>
             </article>
           </div>
         </section>
 
         <form className="form-section" action="" id="form">
-          <fieldset className="legend">
+          <FormDesign/>
+          {/* <fieldset className="legend">
             <div className="js-legend legend__container" id="legend-design" onClick={handleCollapsable}>
               <div className="legend__container--icon">
                 <i className="legend__icon far fa-object-ungroup icon"
@@ -255,7 +256,7 @@ function App() {
                 </label>
               </div>
             </div>
-          </fieldset> */}
+          </fieldset>  */}
 
           <fieldset className="legend">
             <div
