@@ -2,13 +2,15 @@ import "../stylesheets/App.scss";
 import { useState, useEffect } from "react";
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-import trashRegular from "../images/trash-alt-regular.svg";
 import shareIconCard from "../images/address-card-regular (2).svg";
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
 import InputLabel from "./InputLabel";
 import ls from "../services/localStorage";
+import PreviewBtnReset from './PreviewBtnReset';
+import PreviewIcons from "./PreviewIcons";
+import Preview from "./Preview";
 
 import FormFill from "./FormFill";
 
@@ -28,7 +30,25 @@ function App() {
 
   useEffect(() => {
     ls.set("localData", data);
-  }, [data]);
+
+
+
+
+// function App() {
+//   const [data, setData] = useState(ls.get('localData', {
+//     palette: "1",
+//     name: "",
+//     job: "",
+//     email: "",
+//     phone: "",
+//     linkedin: "",
+//     github: "",
+//     photo: "Photo"
+//   }));
+
+  // useEffect(() => {
+  //   ls.set('localData', data)
+  // }, [data]);
 
   const handleInput = (event) => {
     const inputChange = event.currentTarget.name;
@@ -81,7 +101,8 @@ function App() {
       <main className="designmain">
         <section className="card-container">
           <div className="container">
-            <button
+          <PreviewBtnReset handleReset={handleReset} />
+          {/* <button
               className="reset__button js-resetBtn"
               type="reset"
               form="form"
@@ -91,29 +112,29 @@ function App() {
                 <img src={trashRegular} alt="Icono de Papelera" />
               </span>
               <small className="reset__button--reset"> Reset</small>
-            </button>
+            </button> */}
+
+            
+            
             <article className="card">
-              <div className="card__title">
-                <div
-                  className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}
-                ></div>
+            <Preview dataPalette={data.palette} dataName={data.name} dataJob={data.job}/>
+              {/* <div className="card__title">
+                <div className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}></div>
                 <div className="card__title--text">
-                  <h3
-                    className={`name name-${data.palette} js-nameInput fullname-js`}
-                  >
-                    {data.name || "nombre y apellidos"}
+                  <h3 className={`name name-${data.palette} js-nameInput fullname-js`}>
+                    {data.name || 'nombre y apellidos'}
                   </h3>
                   <h4 className="subtitle js-jobInput">
-                    {data.job || "Front-end Developer"}
+                    {data.job || 'Front-end Developer'}
                   </h4>
                 </div>
-              </div>
+              </div> */}
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
+
+                <PreviewIcons link={`tel:${data.phone}` || "/"} dataPalette={data.palette} className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`tel:${data.phone}` || "/"}>
                       <i
                         className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
@@ -121,11 +142,10 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
+                </li> */}
+                <PreviewIcons link={`mailto:${data.email || "mailto:email@email.com"}`} dataPalette={data.palette} className={`far fa-envelope cardicon-js icon-${data.palette}`}/>
+                {/* <li>
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a
                       href={`mailto:${data.email || "mailto:email@email.com"}`}
                       className="js_preview_email card__list--icon-1"
@@ -136,60 +156,42 @@ function App() {
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a
-                      href={`//${data.linkedin}`}
-                      className="js-linkedin-link"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+                </li> */}
+                  <PreviewIcons link={`//${data.linkedin}`} dataPalette={data.palette}  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
+                    <a href={`//${data.linkedin}`} className="js-linkedin-link" target="_blank" rel="noreferrer">
                       <i
                         className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a
-                      href={`https://github.com/${data.github}`}
-                      className="js-github-link"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+                </li> */}
+             <PreviewIcons link={`https://github.com/${data.github}`} dataPalette={data.palette}  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+                {/* <li>
+                  <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
+                    <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
                       <i
                         className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </article>
           </div>
         </section>
 
         <form className="form-section" action="" id="form">
-          <FormFill />
-          {/* <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-design"
-              onClick={handleCollapsable}
-            >
+          <fieldset className="legend">
+            <div className="js-legend legend__container" id="legend-design" onClick={handleCollapsable}>
               <div className="legend__container--icon">
-                <i
-                  className="legend__icon far fa-object-ungroup icon"
+                <i className="legend__icon far fa-object-ungroup icon"
                   alt="icono de diseño"
-                  title="diseña tu tarjeta"
-                ></i>
+                  title="diseña tu tarjeta">
+                </i>
                 <legend className="legend__title">diseña</legend>
               </div>
               <i
@@ -463,5 +465,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
