@@ -1,7 +1,7 @@
 
 
 const PreviewIcons = props => {
-  console.log(props)
+  // console.log(props)
     return (
       // <ul className="card__list">
       <li>

@@ -11,6 +11,7 @@ import ls from "../services/localStorage"
 
 import PreviewBtnReset from './PreviewBtnReset';
 import PreviewIcons from "./PreviewIcons";
+import Preview from "./Preview";
 
 function App() {
   const [data, setData] = useState(ls.get('localData', {
@@ -80,11 +81,24 @@ function App() {
       <main className="designmain">
         <section className="card-container">
           <div className="container">
+          <PreviewBtnReset handleReset={handleReset} />
+          {/* <button
+              className="reset__button js-resetBtn"
+              type="reset"
+              form="form"
+              onClick={handleReset}
+            >
+              <span className="reset__button--icon">
+                <img src={trashRegular} alt="Icono de Papelera" />
+              </span>
+              <small className="reset__button--reset"> Reset</small>
+            </button> */}
 
-            <PreviewBtnReset handleReset={handleReset} />
+            
             
             <article className="card">
-              <div className="card__title">
+            <Preview dataPalette={data.palette} dataName={data.name} dataJob={data.job}/>
+              {/* <div className="card__title">
                 <div className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}></div>
                 <div className="card__title--text">
                   <h3 className={`name name-${data.palette} js-nameInput fullname-js`}>
@@ -94,7 +108,7 @@ function App() {
                     {data.job || 'Front-end Developer'}
                   </h4>
                 </div>
-              </div>
+              </div> */}
               <div className="card__photo profile__preview js__profile-preview"></div>
               <ul className="card__list">
 
