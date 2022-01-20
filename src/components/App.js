@@ -2,26 +2,14 @@ import "../stylesheets/App.scss";
 import { useState, useEffect } from "react";
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-<<<<<<< HEAD
-=======
 
->>>>>>> poncegui
 import shareIconCard from "../images/address-card-regular (2).svg";
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
-<<<<<<< HEAD
-import FormFill from "./FormFill";
-import ls from "../services/localStorage";
-import PreviewBtnReset from "./PreviewBtnReset";
-import PreviewIcons from "./PreviewIcons";
-=======
 import ls from "../services/localStorage";
 
->>>>>>> poncegui
 import Preview from "./Preview";
-import FormDesign from "./FormDesign";
-import Header from "./Header";
 
 function App() {
   const [data, setData] = useState(
@@ -39,21 +27,13 @@ function App() {
 
   useEffect(() => {
     ls.set("localData", data);
-<<<<<<< HEAD
-  });
-=======
   }, [data]);
->>>>>>> poncegui
 
-  const handleInput = (value,name) => {
-    const inputChange = name;
+  const handleInput = (event) => {
+    const inputChange = event.currentTarget.name;
     setData({
       ...data,
-<<<<<<< HEAD
-      [inputChange]: value,
-=======
       [inputChange]: event.currentTarget.value,
->>>>>>> poncegui
     });
   };
 
@@ -87,54 +67,17 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <header className="header">
+        <a href="./index.html">
+          <img
+            className="header__img"
+            src={superPopLogo}
+            alt="awesome profile cards"
+          />
+        </a>
+      </header>
 
       <main className="designmain">
-<<<<<<< HEAD
-        <section className="card-container">
-          <div className="container">
-            <PreviewBtnReset handleReset={handleReset} />
-
-            <article className="card">
-              <Preview
-                dataPalette={data.palette}
-                dataName={data.name}
-                dataJob={data.job}
-              />
-
-              <div className="card__photo profile__preview js__profile-preview"></div>
-              <ul className="card__list">
-                <PreviewIcons
-                  link={`tel:${data.phone}` || "/"}
-                  dataPalette={data.palette}
-                  className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`mailto:${data.email || "mailto:email@email.com"}`}
-                  dataPalette={data.palette}
-                  className={`far fa-envelope cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`//${data.linkedin}`}
-                  dataPalette={data.palette}
-                  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`https://github.com/${data.github}`}
-                  dataPalette={data.palette}
-                  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <form className="form-section" action="" id="form">
-          <FormDesign/>
-=======
         <Preview
           handleReset={handleReset}
           dataPalette={data.palette}
@@ -219,7 +162,6 @@ function App() {
               </div>
             </div>
           </fieldset>
->>>>>>> poncegui
 
           <fieldset className="legend">
             <div
@@ -243,12 +185,6 @@ function App() {
                 alt="arrow"
               ></i>
             </div>
-<<<<<<< HEAD
-            <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
-              
-              <FormFill handleInput={handleInput()} data={data} />
-
-=======
             <div
               className={`fill-container ${collapsableFill ? "collapsed" : ""}`}
             >
@@ -342,7 +278,6 @@ function App() {
                   onChange={handleInput}
                 />
               </label>
->>>>>>> poncegui
             </div>
           </fieldset>
 
