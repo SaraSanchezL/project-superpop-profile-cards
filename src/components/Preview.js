@@ -1,7 +1,7 @@
 
 
 const Preview = props => {
-  console.log(props)
+//   console.log(props)
     return (
 
   <>
@@ -15,7 +15,7 @@ const Preview = props => {
                     {props.dataJob || 'Front-end Developer'}
                   </h4>
                 </div>
-              </div>
+        </div>
   
   </>
  

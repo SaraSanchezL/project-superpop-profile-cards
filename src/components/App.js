@@ -148,7 +148,7 @@ function App() {
                     </a>
                   </div>
                 </li> */}
-             <PreviewIcons link={`//${data.linkedin}`} dataPalette={data.palette}  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
+             <PreviewIcons link={`https://github.com/${data.github}`} dataPalette={data.palette}  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}/>
                 {/* <li>
                   <div className={`card__list--icon icon-js iconcircle-${data.palette}`}>
                     <a href={`https://github.com/${data.github}`} className="js-github-link" target="_blank" rel="noreferrer">
