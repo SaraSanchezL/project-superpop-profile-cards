@@ -11,7 +11,6 @@ import ls from "../services/localStorage";
 import PreviewBtnReset from './PreviewBtnReset';
 import PreviewIcons from "./PreviewIcons";
 import Preview from "./Preview";
-
 import FormFill from "./FormFill";
 
 function App() {
@@ -30,10 +29,6 @@ function App() {
 
   useEffect(() => {
     ls.set("localData", data);
-
-
-
-
 // function App() {
 //   const [data, setData] = useState(ls.get('localData', {
 //     palette: "1",
@@ -255,7 +250,7 @@ function App() {
                 </label>
               </div>
             </div>
-          </fieldset> */}
+          </fieldset>
 
           <fieldset className="legend">
             <div
