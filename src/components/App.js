@@ -7,8 +7,9 @@ import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
 import ls from "../services/localStorage";
-import FormFill from '.FormFill';
+import FormFill from './FormFill';
 import Preview from "./Preview";
+import Header from './Header';
 
 function App() {
   const [data, setData] = useState(
@@ -28,11 +29,11 @@ function App() {
     ls.set("localData", data);
   }, [data]);
 
-  const handleInput = (event) => {
-    const inputChange = event.currentTarget.name;
+  const handleInput = (name,value) => {
+    const inputChange = name;
     setData({
       ...data,
-      [inputChange]: event.currentTarget.value,
+      [inputChange]: value,
     });
   };
 
@@ -66,15 +67,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">
-        <a href="./index.html">
-          <img
-            className="header__img"
-            src={superPopLogo}
-            alt="awesome profile cards"
-          />
-        </a>
-      </header>
+      <Header/>
 
       <main className="designmain">
         <Preview
