@@ -141,7 +141,7 @@ function App() {
             </div>
             <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
               
-              <FormFill handleInput={handleInput()} data={data} />
+              <FormFill handleInput={handleInput} data={data} />
 
             </div>
           </fieldset>
