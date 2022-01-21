@@ -6,13 +6,9 @@ import shareIconCard from "../images/address-card-regular (2).svg";
 import imgShareTwitter from "../images/twitter.svg";
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
-import FormFill from "./FormFill";
 import ls from "../services/localStorage";
-import PreviewBtnReset from "./PreviewBtnReset";
-import PreviewIcons from "./PreviewIcons";
+import FormFill from '.FormFill';
 import Preview from "./Preview";
-import FormDesign from "./FormDesign";
-import Header from "./Header";
 
 function App() {
   const [data, setData] = useState(
@@ -30,13 +26,13 @@ function App() {
 
   useEffect(() => {
     ls.set("localData", data);
-  });
+  }, [data]);
 
-  const handleInput = (value,name) => {
-    const inputChange = name;
+  const handleInput = (event) => {
+    const inputChange = event.currentTarget.name;
     setData({
       ...data,
-      [inputChange]: value,
+      [inputChange]: event.currentTarget.value,
     });
   };
 
@@ -70,52 +66,105 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <header className="header">
+        <a href="./index.html">
+          <img
+            className="header__img"
+            src={superPopLogo}
+            alt="awesome profile cards"
+          />
+        </a>
+      </header>
 
       <main className="designmain">
-        <section className="card-container">
-          <div className="container">
-            <PreviewBtnReset handleReset={handleReset} />
-
-            <article className="card">
-              <Preview
-                dataPalette={data.palette}
-                dataName={data.name}
-                dataJob={data.job}
-              />
-
-              <div className="card__photo profile__preview js__profile-preview"></div>
-              <ul className="card__list">
-                <PreviewIcons
-                  link={`tel:${data.phone}` || "/"}
-                  dataPalette={data.palette}
-                  className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`mailto:${data.email || "mailto:email@email.com"}`}
-                  dataPalette={data.palette}
-                  className={`far fa-envelope cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`//${data.linkedin}`}
-                  dataPalette={data.palette}
-                  className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-
-                <PreviewIcons
-                  link={`https://github.com/${data.github}`}
-                  dataPalette={data.palette}
-                  className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                />
-              </ul>
-            </article>
-          </div>
-        </section>
+        <Preview
+          handleReset={handleReset}
+          dataPalette={data.palette}
+          dataName={data.name}
+          dataJob={data.job}
+          dataEmail={data.email}
+          dataPhone={data.phone}
+          dataLinkedin={data.linkedin}
+          dataGithub={data.github}
+        />
 
         <form className="form-section" action="" id="form">
-          <FormDesign/>
+          <fieldset className="legend">
+            <div
+              className="js-legend legend__container"
+              id="legend-design"
+              onClick={handleCollapsable}
+            >
+              <div className="legend__container--icon">
+                <i
+                  className="legend__icon far fa-object-ungroup icon"
+                  alt="icono de diseño"
+                  title="diseña tu tarjeta"
+                ></i>
+                <legend className="legend__title">diseña</legend>
+              </div>
+              <i
+                title="Pulsa para desplegar"
+                className={`legend__arrow fas ${
+                  collapsablePalette ? "fa-chevron-down" : "fa-chevron-up"
+                }`}
+                alt="arrow"
+              ></i>
+            </div>
+            <div
+              className={`design-container js-container ${
+                collapsablePalette ? "collapsed" : ""
+              }`}
+            >
+              <h4 className="design__title">Colores</h4>
+              <div className="options-container">
+                <label className="design__label" htmlFor="blue-green">
+                  <input
+                    className="design__radio"
+                    type="radio"
+                    name="palette"
+                    id="blue-green"
+                    value="1"
+                    checked={data.palette === "1"}
+                    onChange={handleInput}
+                  />
+                  <div className="design__color design__color--primary-blue"></div>
+                  <div className="design__color design__color--dirty-blue"></div>
+                  <div className="design__color design__color--green"></div>
+                </label>
+
+                <label className="design__label" htmlFor="red-orange">
+                  <input
+                    className="design__radio"
+                    type="radio"
+                    name="palette"
+                    id="red-orange"
+                    value="2"
+                    checked={data.palette === "2"}
+                    onChange={handleInput}
+                  />
+                  <div className="design__color design__color--dried-blood"></div>
+                  <div className="design__color design__color--red"></div>
+                  <div className="design__color design__color--tomato"></div>
+                </label>
+
+                <label className="design__label" htmlFor="color-mix">
+                  <input
+                    className="design__radio"
+                    type="radio"
+                    name="palette"
+                    id="color-mix"
+                    value="3"
+                    checked={data.palette === "3"}
+                    onChange={handleInput}
+                  />
+                  <div className="design__color design__color--slate"></div>
+                  <div className="design__color design__color--yellow"></div>
+                  <div className="design__color design__color--sky-blue"></div>
+                </label>
+              </div>
+            </div>
+          </fieldset>
 
           <fieldset className="legend">
             <div
