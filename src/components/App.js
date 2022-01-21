@@ -367,37 +367,10 @@ function App() {
             </div>
           </fieldset>
 
-          <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-share"
-              onClick={handleCollapsable}
-            >
-              <div className="legend__container--icon">
-                <i
-                  className="legend__icon far fa-address-card icon"
-                  alt="icono de compartir"
-                  title="Comparte tu tarjeta"
-                ></i>
-                <legend className="legend__title">Comparte</legend>
-              </div>
-              <i
-                className={`legend__arrow fas ${
-                  collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
-                alt="arrow"
-                title="Click to open"
-              ></i>
-            </div>
-            <div
-              className={`sharecontainer ${
-                collapsableShare ? "collapsed" : ""
-              }`}
-            >
-              <ShareCard />
+         
+              <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare}/>
               
-            </div>
-          </fieldset>
+            
         </form>
       </main>
       <footer className="page__footer">

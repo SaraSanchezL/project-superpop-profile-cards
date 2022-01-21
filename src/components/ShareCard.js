@@ -1,13 +1,42 @@
-import imgShareTwitter from "../images/twitter.svg";
+import imgShareTwitter from "../images/twitter.svg"
 import imgShareLinkedin from "../images/linkedin.svg";
 import imgShareFacebook from "../images/facebook.svg";
 import ShareSocialNetwork from "./ShareSocialNetwork";
 import BtnMakeCard from "./BtnMakeCard";
 import CreatedCard from "./CreatedCard";
 
-const ShareCard = () => {
+const ShareCard = (props) => {
   return (
     <>
+
+<fieldset className="legend">
+            <div
+              className="js-legend legend__container"
+              id="legend-share"
+              onClick={props.handleCollapsable}
+            >
+              <div className="legend__container--icon">
+                <i
+                  className="legend__icon far fa-address-card icon"
+                  alt="icono de compartir"
+                  title="Comparte tu tarjeta"
+                ></i>
+                <legend className="legend__title">Comparte</legend>
+              </div>
+              <i
+                className={`legend__arrow fas ${
+                  props.collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
+                }`}
+                alt="arrow"
+                title="Click to open"
+              ></i>
+            </div>
+            <div
+              className={`sharecontainer ${
+                props.collapsableShare ? "collapsed" : ""
+              }`}
+            >
+
       <BtnMakeCard />
 
       <section className="share_creation ">
@@ -34,6 +63,10 @@ const ShareCard = () => {
           text={"Compartir en Linkedin"}
         />
       </section>
+           
+      </div>
+          </fieldset>
+
     </>
   );
 };
