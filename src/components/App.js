@@ -69,6 +69,11 @@ function App() {
     }
   };
 
+  const handleApi = (event) => {
+    event.preventDefault();
+    callToApi(data);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -169,7 +174,8 @@ function App() {
                 <button
                   type="submit"
                   className="share_button__item sharebuttonorange"
-                  disabled
+                  onClick={handleApi}
+
                 >
                   <img
                     className="share_button__item--img"
