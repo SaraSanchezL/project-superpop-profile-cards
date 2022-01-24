@@ -5,15 +5,11 @@ import { useState, useEffect } from "react";
 
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-import shareIconCard from "../images/address-card-regular (2).svg";
-import imgShareTwitter from "../images/twitter.svg";
-import imgShareLinkedin from "../images/linkedin.svg";
-import imgShareFacebook from "../images/facebook.svg";
-// import ls from "../services/localStorage";
 import FormFill from './FormFill';
 import Preview from "./Preview";
 import Header from './Header';
 import FormDesign from "./FormDesign";
+import ShareCard from "./ShareCard";
 
 function App() {
   const [data, setData] = useState(
@@ -145,102 +141,9 @@ function App() {
             </div>
           </fieldset>
 
-          <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-share"
-              onClick={handleCollapsable}
-            >
-              <div className="legend__container--icon">
-                <i
-                  className="legend__icon far fa-address-card icon"
-                  alt="icono de compartir"
-                  title="Comparte tu tarjeta"
-                ></i>
-                <legend className="legend__title">Comparte</legend>
-              </div>
-              <i
-                className={`legend__arrow fas ${collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
-                  }`}
-                alt="arrow"
-                title="Click to open"
-              ></i>
-            </div>
-            <div
-              className={`sharecontainer ${collapsableShare ? "collapsed" : ""
-                }`}
-            >
-              <section className="share_button">
-                <button
-                  type="submit"
-                  className="share_button__item sharebuttonorange"
-                  onClick={handleApi}
 
-                >
-                  <img
-                    className="share_button__item--img"
-                    src={shareIconCard}
-                    title="icon"
-                    alt="Comparte"
-                  />
-                  Crear Tarjeta
+          <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare} handleApi={handleApi} />
 
-                </button>
-              </section>
-              {/* Meter esto en la funcion renderShare() y si la response es success se pinta, si no patata */}
-              <section className="share_creation collapsed">
-                <div className="share_button__item--line"></div>
-                <h3 className="share_creation__title">
-                  La tarjeta ha sido creada:
-                </h3>
-                <a
-                  href="./#"
-                  target="_blank"
-                  className="share_creation__link href js-shareCreationLink"
-                  src="https://awesome-profile-card.com?id=A456DF0001"
-                >
-                  https://awesome-profile-card.com?id=A456DF0001
-                </a>
-                {/* 
-                <a
-                  target="_blank"
-                  className="share_creation__twitter js-share-RRSS"
-                  href={`https://twitter.com/intent/tweet?text=%C2%A1Comparte%20esta%20tarjeta%20super%20molona%21&url=${cardUrl}`}
-                >
-                  <img
-                    className="share_creation__twitter--img"
-                    src={imgShareTwitter}
-                    alt="Comparte Twitter"
-                  />
-                  Compartir en Twitter
-                </a> */}
-                <a
-                  className="share_creation__linkedin js-share-RRSS"
-                  href="./#"
-                  target="_blank"
-                >
-                  <img
-                    className="share_creation__linkedin--img"
-                    src={imgShareLinkedin}
-                    alt="Comparte Linkedin"
-                  />
-                  Comparte en LinkedIn
-                </a>
-                <a
-                  className="share_creation__facebook js-share-RRSS"
-                  href="./#"
-                  target="_blank"
-                >
-                  <img
-                    className="share_creation__facebook--img"
-                    src={imgShareFacebook}
-                    alt="Comparte Facebook"
-                  />
-                  Comparte en Facebook
-                </a>
-              </section>
-            </div>
-          </fieldset>
         </form>
       </main>
       <footer className="page__footer">
