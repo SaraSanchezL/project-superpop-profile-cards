@@ -13,6 +13,7 @@ const Palette = (props) => {
                 id={props.id}
                 value={props.value}
                 onChange={handleChangeInput}
+                checked={props.data.palette === props.value}
             />
             <div className={`design__color design__color--${props.color1}`}></div>
             <div className={`design__color design__color--${props.color2}`}></div>
