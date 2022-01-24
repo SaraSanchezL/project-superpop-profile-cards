@@ -1,10 +1,14 @@
 import "../stylesheets/App.scss";
+import ls from "../services/localStorage"
+import callToApi from '../services/api';
 import { useState, useEffect } from "react";
-import ls from "../services/localStorage";
-//Images
+
+//Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-import trashRegular from "../images/trash-alt-regular.svg";
-//Components
+import FormFill from './FormFill';
+import Preview from "./Preview";
+import Header from './Header';
+import FormDesign from "./FormDesign";
 import ShareCard from "./ShareCard";
 
 function App() {
@@ -25,11 +29,11 @@ function App() {
     ls.set("localData", data);
   }, [data]);
 
-  const handleInput = (event) => {
-    const inputChange = event.currentTarget.name;
+  const handleInput = (name, value) => {
+    const inputChange = name;
     setData({
       ...data,
-      [inputChange]: event.currentTarget.value,
+      [inputChange]: value,
     });
   };
 
@@ -61,115 +65,26 @@ function App() {
     }
   };
 
+  const handleApi = (event) => {
+    event.preventDefault();
+    callToApi(data);
+  }
+
   return (
     <div className="App">
-      <header className="header">
-        <a href="./index.html">
-          <img
-            className="header__img"
-            src={superPopLogo}
-            alt="awesome profile cards"
-          />
-        </a>
-      </header>
+      <Header />
 
       <main className="designmain">
-        <section className="card-container">
-          <div className="container">
-            <button
-              className="reset__button js-resetBtn"
-              type="reset"
-              form="form"
-              onClick={handleReset}
-            >
-              <span className="reset__button--icon">
-                <img src={trashRegular} alt="Icono de Papelera" />
-              </span>
-              <small className="reset__button--reset"> Reset</small>
-            </button>
-            <article className="card">
-              <div className="card__title">
-                <div
-                  className={`card__title--rectangle rectangle-js rectangle-${data.palette}`}
-                ></div>
-                <div className="card__title--text">
-                  <h3
-                    className={`name name-${data.palette} js-nameInput fullname-js`}
-                  >
-                    {data.name || "nombre y apellidos"}
-                  </h3>
-                  <h4 className="subtitle js-jobInput">
-                    {data.job || "Front-end Developer"}
-                  </h4>
-                </div>
-              </div>
-              <div className="card__photo profile__preview js__profile-preview"></div>
-              <ul className="card__list">
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a href={`tel:${data.phone}` || "/"}>
-                      <i
-                        className={`fas fa-mobile-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a
-                      href={`mailto:${data.email || "mailto:email@email.com"}`}
-                      className="js_preview_email card__list--icon-1"
-                    >
-                      <i
-                        className={`far fa-envelope cardicon-js icon-${data.palette}`}
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a
-                      href={`//${data.linkedin}`}
-                      className="js-linkedin-link"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <i
-                        className={`fab fa-linkedin-in card__list--icon-1 cardicon-js icon-${data.palette}`}
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div
-                    className={`card__list--icon icon-js iconcircle-${data.palette}`}
-                  >
-                    <a
-                      href={`https://github.com/${data.github}`}
-                      className="js-github-link"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <i
-                        className={`fab fa-github-alt card__list--icon-1 cardicon-js icon-${data.palette}`}
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </article>
-          </div>
-        </section>
+        <Preview
+          handleReset={handleReset}
+          dataPalette={data.palette}
+          dataName={data.name}
+          dataJob={data.job}
+          dataEmail={data.email}
+          dataPhone={data.phone}
+          dataLinkedin={data.linkedin}
+          dataGithub={data.github}
+        />
 
         <form className="form-section" action="" id="form">
           <fieldset className="legend">
@@ -188,64 +103,13 @@ function App() {
               </div>
               <i
                 title="Pulsa para desplegar"
-                className={`legend__arrow fas ${
-                  collapsablePalette ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
+                className={`legend__arrow fas ${collapsablePalette ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
                 alt="arrow"
               ></i>
             </div>
-            <div
-              className={`design-container js-container ${
-                collapsablePalette ? "collapsed" : ""
-              }`}
-            >
-              <h4 className="design__title">Colores</h4>
-              <div className="options-container">
-                <label className="design__label" htmlFor="blue-green">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="blue-green"
-                    value="1"
-                    checked={data.palette === "1"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--primary-blue"></div>
-                  <div className="design__color design__color--dirty-blue"></div>
-                  <div className="design__color design__color--green"></div>
-                </label>
-
-                <label className="design__label" htmlFor="red-orange">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="red-orange"
-                    value="2"
-                    checked={data.palette === "2"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--dried-blood"></div>
-                  <div className="design__color design__color--red"></div>
-                  <div className="design__color design__color--tomato"></div>
-                </label>
-
-                <label className="design__label" htmlFor="color-mix">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="color-mix"
-                    value="3"
-                    checked={data.palette === "3"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--slate"></div>
-                  <div className="design__color design__color--yellow"></div>
-                  <div className="design__color design__color--sky-blue"></div>
-                </label>
-              </div>
+            <div className={`design-container js-container ${collapsablePalette ? "collapsed" : ""}`} >
+              <FormDesign handleInput={handleInput} data={data} />
             </div>
           </fieldset>
 
@@ -265,112 +129,21 @@ function App() {
               </div>
               <i
                 title="Pulsa para desplegar"
-                className={`legend__arrow fas ${
-                  collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
+                className={`legend__arrow fas ${collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
                 alt="arrow"
               ></i>
             </div>
-            <div
-              className={`fill-container ${collapsableFill ? "collapsed" : ""}`}
-            >
-              <label className="fill__label" htmlFor="name">
-                Nombre completo
-                <input
-                  className="fill__input fill__input-js js-fullname"
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Ej.: Sally Jill"
-                  value={data.name}
-                  onChange={handleInput}
-                />
-              </label>
-              <label className="fill__label" htmlFor="job">
-                Puesto
-                <input
-                  className="fill__input fill__input-js js-job"
-                  type="text"
-                  name="job"
-                  id="job"
-                  placeholder="Ej.: Front-end unicorn"
-                  value={data.job}
-                  onChange={handleInput}
-                />
-              </label>
-              <div className="fill__label" htmlFor="profilePic">
-                <p className="label__img">Imagen de perfil</p>
-                <label
-                  className="fill__btn js__profile-trigger"
-                  htmlFor="img-selector"
-                >
-                  Añadir imagen
-                </label>
-                <input
-                  className="action__hiddenField js__profile-upload-btn hidden"
-                  type="file"
-                  name="photo"
-                  id="img-selector"
-                />
-                <div className="label__container profile">
-                  <div className="fill__profile-pic profile__image js__profile-image"></div>
-                </div>
-              </div>
-              <label className="fill__label" htmlFor="email">
-                Email
-                <input
-                  className="fill__input fill__input-js js-email"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Ej.: sally-hill@gmail.com"
-                  value={data.email}
-                  onChange={handleInput}
-                />
-              </label>
-              <label className="fill__label" htmlFor="phone">
-                Teléfono
-                <input
-                  className="fill__input fill__input-js"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  placeholder="Ej.: 555-555-555"
-                  value={data.phone}
-                  onChange={handleInput}
-                />
-              </label>
-              <label className="fill__label" htmlFor="linkedin">
-                Linkedin
-                <input
-                  className="fill__input fill__input-js"
-                  type="text"
-                  name="linkedin"
-                  id="linkedin"
-                  placeholder="Ej.: linkedin.com/in/sally.hill"
-                  value={data.linkedin}
-                  onChange={handleInput}
-                />
-              </label>
-              <label className="fill__label" htmlFor="github">
-                Github
-                <input
-                  className="fill__input fill__input-js"
-                  type="text"
-                  name="github"
-                  id="github"
-                  placeholder="Ej.: @sally-hill"
-                  value={data.github}
-                  onChange={handleInput}
-                />
-              </label>
+            <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
+
+              <FormFill handleInput={handleInput} data={data} />
+
             </div>
           </fieldset>
 
-         
-              <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare}/>
-              
-            
+
+          <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare} handleApi={handleApi} />
+
         </form>
       </main>
       <footer className="page__footer">

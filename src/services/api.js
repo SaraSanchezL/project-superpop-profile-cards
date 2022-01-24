@@ -1,3 +1,29 @@
+// Fichero src/services/api.js
+const callToApi = (data) => {
+  // Llamamos al API
+  return fetch("https://awesome-profile-cards.herokuapp.com/card", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    });
+};
+
+export default callToApi;
+
+/* fetch("https:/api.dev.com",
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then(response => response.json()).then(data => { });*/
+
+
 /*
 function sendUserInfo() {
   fetch("https://awesome-profile-cards.herokuapp.com/card", {

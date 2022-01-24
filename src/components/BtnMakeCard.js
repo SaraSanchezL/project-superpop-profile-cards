@@ -1,11 +1,12 @@
 import shareIconCard from "../images/address-card-regular (2).svg"
 
-const BtnMakeCard = () => {
+const BtnMakeCard = (props) => {
   return( 
   <section className="share_button">
                 <button
                   type="submit"
                   className="share_button__item sharebuttonorange"
+                  onClick={props.handleApi}
                 >
                   <img
                     className="share_button__item--img"

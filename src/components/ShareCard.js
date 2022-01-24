@@ -37,7 +37,7 @@ const ShareCard = (props) => {
               }`}
             >
 
-      <BtnMakeCard />
+      <BtnMakeCard handleApi={props.handleApi} />
 
       <section className="share_creation ">
         <CreatedCard URLCard={"./#"} />
