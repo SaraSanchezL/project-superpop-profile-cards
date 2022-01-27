@@ -53,6 +53,11 @@ function App() {
   const [collapsablePalette, setcollapsablePalette] = useState(false);
   const [collapsableFill, setcollapsableFill] = useState(true);
   const [collapsableShare, setcollapsableShare] = useState(true);
+  const [avatar, setAvatar] = useState('');
+
+  const updateAvatar = (avatar) => {
+    setAvatar(avatar);
+  };
 
   const handleCollapsable = (ev) => {
     const oneID = ev.currentTarget.id;
@@ -84,6 +89,7 @@ function App() {
           dataPhone={data.phone}
           dataLinkedin={data.linkedin}
           dataGithub={data.github}
+          avatar={avatar}
         />
 
         <form className="form-section" action="" id="form">
@@ -136,7 +142,7 @@ function App() {
             </div>
             <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
 
-              <FormFill handleInput={handleInput} data={data} />
+              <FormFill handleInput={handleInput} data={data} updateAvatar={updateAvatar} avatar={avatar}/>
 
             </div>
           </fieldset>
