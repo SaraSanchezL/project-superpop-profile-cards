@@ -16,6 +16,7 @@ const BtnMakeCard = (props) => {
                   />
                   Crear Tarjeta
                 </button>
+                <p className="share_creation__title">{props.dataApi.success === false ? "Por favor, asegúrese de que ha cumplimentado todos los campos." : ''}</p>
               </section>
 )}
 export default BtnMakeCard;

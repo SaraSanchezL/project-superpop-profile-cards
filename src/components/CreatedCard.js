@@ -8,9 +8,9 @@ const CreatedCard = (props) => {
         target="_blank"
         rel="noreferrer"
         className="share_creation__link href js-shareCreationLink"
-        src="https://awesome-profile-card.com?id=A456DF0001"
+        src={props.URLCard}
       >
-        https://awesome-profile-card.com?id=A456DF0001
+        {props.URLCard}
       </a>
     </>
   );

@@ -25,6 +25,8 @@ function App() {
     })
   );
 
+  const [dataApi, setDataApi] = useState({});
+
   useEffect(() => {
     ls.set("localData", data);
   }, [data]);
@@ -46,8 +48,9 @@ function App() {
       phone: "",
       linkedin: "",
       github: "",
-      photo: "Photo",
+      photo: "",
     });
+    setDataApi({});
   };
 
   const [collapsablePalette, setcollapsablePalette] = useState(false);
@@ -67,8 +70,10 @@ function App() {
 
   const handleApi = (event) => {
     event.preventDefault();
-    callToApi(data);
-  }
+    callToApi(data).then((response) => {
+      setDataApi(response);
+  })
+}
 
   return (
     <div className="App">
@@ -142,7 +147,7 @@ function App() {
           </fieldset>
 
 
-          <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare} handleApi={handleApi} />
+          <ShareCard handleCollapsable={handleCollapsable} collapsableShare={collapsableShare} handleApi={handleApi} dataApi={dataApi} data={data} />
 
         </form>
       </main>
