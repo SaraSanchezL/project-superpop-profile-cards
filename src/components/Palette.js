@@ -1,5 +1,4 @@
 const Palette = (props) => {
-
     const handleChangeInput = (ev) => {
         props.handleInput(ev.currentTarget.name, ev.currentTarget.value);
     };
