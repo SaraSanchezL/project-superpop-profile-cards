@@ -37,27 +37,27 @@ const ShareCard = (props) => {
               }`}
             >
 
-      <BtnMakeCard handleApi={props.handleApi} />
+      <BtnMakeCard handleApi={props.handleApi} dataApi={props.dataApi} data={props.data} />
 
-      <section className="share_creation ">
-        <CreatedCard URLCard={"./#"} />
+      <section className={`share_creation ${props.dataApi.success ? '' : 'collapsed'}`} >
+        <CreatedCard URLCard={props.dataApi.cardURL} />
         <ShareSocialNetwork
           className={"share_creation__twitter js-share-RRSS"}
-          href={"https://www.twitter.com"}
+          href={`https://twitter.com/intent/tweet?text=%C2%A1Comparte%20esta%20tarjeta%20super%20molona%21&url=${props.dataApi.cardURL}`}
           img={imgShareTwitter}
           alt={"Compartir en Twitter"}
           text={"Compartir en Twitter"}
         />
         <ShareSocialNetwork
           className={"share_creation__facebook js-share-RRSS"}
-          href={"./#"}
+          href={`http://www.facebook.com/share.php?u=${props.dataApi.cardURL}`}
           img={imgShareFacebook}
           alt={"Compartir en Facebook"}
           text={"Compartir en Facebook"}
         />
         <ShareSocialNetwork
           className={"share_creation__linkedin js-share-RRSS"}
-          href={"./#"}
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${props.dataApi.cardURL}`}
           img={imgShareLinkedin}
           alt={"Compartir en Linkedin"}
           text={"Compartir en Linkedin"}

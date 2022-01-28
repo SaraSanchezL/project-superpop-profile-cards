@@ -7,8 +7,8 @@ const callToApi = (data) => {
     headers: { "Content-Type": "application/json" },
   })
     .then(response => response.json())
-    .then(data => {
-      return data;
+    .then(dataApi => {
+      return dataApi; 
     });
 };
 
