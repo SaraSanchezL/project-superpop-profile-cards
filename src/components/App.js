@@ -3,9 +3,6 @@ import ls from "../services/localStorage";
 import callToApi from "../services/api";
 import { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
-
-//Imagenes
-import superPopLogo from "../images/superpop-logo.png";
 import FormFill from "./FormFill";
 import Preview from "./Preview";
 import Header from "./Header";
@@ -59,7 +56,7 @@ function App() {
   const [collapsablePalette, setcollapsablePalette] = useState(false);
   const [collapsableFill, setcollapsableFill] = useState(true);
   const [collapsableShare, setcollapsableShare] = useState(true);
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState("");
 
   const updateAvatar = (avatar) => {
     setAvatar(avatar);
@@ -162,7 +159,12 @@ function App() {
                   collapsableFill ? "collapsed" : ""
                 }`}
               >
-                <FormFill handleInput={handleInput} data={data} updateAvatar={updateAvatar} avatar={avatar}/>
+                <FormFill
+                  handleInput={handleInput}
+                  data={data}
+                  updateAvatar={updateAvatar}
+                  avatar={avatar}
+                />
               </div>
             </fieldset>
 
