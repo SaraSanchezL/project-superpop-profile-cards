@@ -12,6 +12,7 @@ import Header from "./Header";
 import FormDesign from "./FormDesign";
 import ShareCard from "./ShareCard";
 import Landing from "./Landing";
+import Footer from "./Footer";
 
 function App() {
   const [data, setData] = useState(
@@ -174,14 +175,7 @@ function App() {
             />
           </form>
         </main>
-        <footer className="page__footer">
-          <h6 className="page__footer--title">Tarjetas super molonas @2021</h6>
-          <img
-            className="page__footer--logo"
-            src={superPopLogo}
-            alt="Logo de SuperPop"
-          />
-        </footer>
+        <Footer />
       </Route>
     </div>
   );
