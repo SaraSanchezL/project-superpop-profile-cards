@@ -1,3 +1,4 @@
+import GetAvatar from "./getAvatar";
 import InputLabel from "./InputLabel";
 const FormFill = (props) => {
   return (
@@ -25,8 +26,8 @@ const FormFill = (props) => {
         handleInput={props.handleInput}
         value={props.data.job}
       />
-
-      <div className="fill__label" htmlFor="profilePic">
+      <GetAvatar updateAvatar={props.updateAvatar} avatar={props.avatar}/>
+      {/*<div className="fill__label" htmlFor="profilePic">
         <p className="label__img">Imagen de perfil</p>
         <label className="fill__btn js__profile-trigger" htmlFor="img-selector">
           Añadir imagen
@@ -40,7 +41,7 @@ const FormFill = (props) => {
         <div className="label__container profile">
           <div className="fill__profile-pic profile__image js__profile-image"></div>
         </div>
-      </div>
+      </div>*/}
 
       <InputLabel
         type="email"

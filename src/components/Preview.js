@@ -1,5 +1,6 @@
 import PreviewBtnReset from "./PreviewBtnReset";
 import PreviewIcons from "./PreviewIcons";
+import Profile from "./Profile";
 
 const Preview = (props) => {
   return (
@@ -23,7 +24,8 @@ const Preview = (props) => {
                 </h4>
               </div>
             </div>
-            <div className="card__photo profile__preview js__profile-preview"></div>
+            <Profile avatar={props.avatar}/>
+            {/*<div className="card__photo profile__preview js__profile-preview"></div>*/}
             <ul className="card__list">
               <PreviewIcons
                 link={`tel:${props.dataPhone}` || "/"}

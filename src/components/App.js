@@ -1,15 +1,17 @@
 import "../stylesheets/App.scss";
+import ls from "../services/localStorage";
+import callToApi from "../services/api";
 import { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
+
 //Imagenes
 import superPopLogo from "../images/superpop-logo.png";
-import shareIconCard from "../images/address-card-regular (2).svg";
-import imgShareTwitter from "../images/twitter.svg";
-import imgShareLinkedin from "../images/linkedin.svg";
-import imgShareFacebook from "../images/facebook.svg";
-import ls from "../services/localStorage";
-import FormFill from './FormFill';
+import FormFill from "./FormFill";
 import Preview from "./Preview";
-import Header from './Header';
+import Header from "./Header";
+import FormDesign from "./FormDesign";
+import ShareCard from "./ShareCard";
+import Landing from "./Landing";
 
 function App() {
   const [data, setData] = useState(
@@ -21,15 +23,17 @@ function App() {
       phone: "",
       linkedin: "",
       github: "",
-      photo: "Photo",
+      photo: "",
     })
   );
+
+  const [dataApi, setDataApi] = useState({});
 
   useEffect(() => {
     ls.set("localData", data);
   }, [data]);
 
-  const handleInput = (name,value) => {
+  const handleInput = (name, value) => {
     const inputChange = name;
     setData({
       ...data,
@@ -46,13 +50,19 @@ function App() {
       phone: "",
       linkedin: "",
       github: "",
-      photo: "Photo",
+      photo: setAvatar(""),
     });
+    setDataApi({});
   };
 
   const [collapsablePalette, setcollapsablePalette] = useState(false);
   const [collapsableFill, setcollapsableFill] = useState(true);
   const [collapsableShare, setcollapsableShare] = useState(true);
+  const [avatar, setAvatar] = useState('');
+
+  const updateAvatar = (avatar) => {
+    setAvatar(avatar);
+  };
 
   const handleCollapsable = (ev) => {
     const oneID = ev.currentTarget.id;
@@ -65,235 +75,114 @@ function App() {
     }
   };
 
+  const handleApi = (event) => {
+    event.preventDefault();
+    callToApi(data).then((response) => {
+      setDataApi(response);
+    });
+  };
+
   return (
     <div className="App">
-      <Header/>
+      <Route path="/" exact>
+        <Landing />
+      </Route>
+      <Route path="/designcards" exact>
+        <Header />
+        <main className="designmain">
+          <Preview
+            handleReset={handleReset}
+            dataPalette={data.palette}
+            dataName={data.name}
+            dataJob={data.job}
+            dataEmail={data.email}
+            dataPhone={data.phone}
+            dataLinkedin={data.linkedin}
+            dataGithub={data.github}
+            avatar={avatar}
+          />
 
-      <main className="designmain">
-        <Preview
-          handleReset={handleReset}
-          dataPalette={data.palette}
-          dataName={data.name}
-          dataJob={data.job}
-          dataEmail={data.email}
-          dataPhone={data.phone}
-          dataLinkedin={data.linkedin}
-          dataGithub={data.github}
-        />
-
-        <form className="form-section" action="" id="form">
-          <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-design"
-              onClick={handleCollapsable}
-            >
-              <div className="legend__container--icon">
+          <form className="form-section" action="" id="form">
+            <fieldset className="legend">
+              <div
+                className="js-legend legend__container"
+                id="legend-design"
+                onClick={handleCollapsable}
+              >
+                <div className="legend__container--icon">
+                  <i
+                    className="legend__icon far fa-object-ungroup icon"
+                    alt="icono de diseño"
+                    title="diseña tu tarjeta"
+                  ></i>
+                  <legend className="legend__title">diseña</legend>
+                </div>
                 <i
-                  className="legend__icon far fa-object-ungroup icon"
-                  alt="icono de diseño"
-                  title="diseña tu tarjeta"
+                  title="Pulsa para desplegar"
+                  className={`legend__arrow fas ${
+                    collapsablePalette ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
+                  alt="arrow"
                 ></i>
-                <legend className="legend__title">diseña</legend>
               </div>
-              <i
-                title="Pulsa para desplegar"
-                className={`legend__arrow fas ${
-                  collapsablePalette ? "fa-chevron-down" : "fa-chevron-up"
+              <div
+                className={`design-container js-container ${
+                  collapsablePalette ? "collapsed" : ""
                 }`}
-                alt="arrow"
-              ></i>
-            </div>
-            <div
-              className={`design-container js-container ${
-                collapsablePalette ? "collapsed" : ""
-              }`}
-            >
-              <h4 className="design__title">Colores</h4>
-              <div className="options-container">
-                <label className="design__label" htmlFor="blue-green">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="blue-green"
-                    value="1"
-                    checked={data.palette === "1"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--primary-blue"></div>
-                  <div className="design__color design__color--dirty-blue"></div>
-                  <div className="design__color design__color--green"></div>
-                </label>
-
-                <label className="design__label" htmlFor="red-orange">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="red-orange"
-                    value="2"
-                    checked={data.palette === "2"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--dried-blood"></div>
-                  <div className="design__color design__color--red"></div>
-                  <div className="design__color design__color--tomato"></div>
-                </label>
-
-                <label className="design__label" htmlFor="color-mix">
-                  <input
-                    className="design__radio"
-                    type="radio"
-                    name="palette"
-                    id="color-mix"
-                    value="3"
-                    checked={data.palette === "3"}
-                    onChange={handleInput}
-                  />
-                  <div className="design__color design__color--slate"></div>
-                  <div className="design__color design__color--yellow"></div>
-                  <div className="design__color design__color--sky-blue"></div>
-                </label>
+              >
+                <FormDesign handleInput={handleInput} data={data} />
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
 
-          <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-fill"
-              onClick={handleCollapsable}
-            >
-              <div className="legend__container--icon">
+            <fieldset className="legend">
+              <div
+                className="js-legend legend__container"
+                id="legend-fill"
+                onClick={handleCollapsable}
+              >
+                <div className="legend__container--icon">
+                  <i
+                    className="legend__icon far fa-keyboard icon"
+                    alt="icono de relleno"
+                    title="Rellena tu tarjeta"
+                  ></i>
+                  <legend className="legend__title">Rellena</legend>
+                </div>
                 <i
-                  className="legend__icon far fa-keyboard icon"
-                  alt="icono de relleno"
-                  title="Rellena tu tarjeta"
+                  title="Pulsa para desplegar"
+                  className={`legend__arrow fas ${
+                    collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
+                  }`}
+                  alt="arrow"
                 ></i>
-                <legend className="legend__title">Rellena</legend>
               </div>
-              <i
-                title="Pulsa para desplegar"
-                className={`legend__arrow fas ${
-                  collapsableFill ? "fa-chevron-down" : "fa-chevron-up"
+              <div
+                className={`fill-container ${
+                  collapsableFill ? "collapsed" : ""
                 }`}
-                alt="arrow"
-              ></i>
-            </div>
-            <div className={`fill-container ${collapsableFill ? "collapsed" : ""}`}>
-              
-              <FormFill handleInput={handleInput} data={data} />
-
-            </div>
-          </fieldset>
-
-          <fieldset className="legend">
-            <div
-              className="js-legend legend__container"
-              id="legend-share"
-              onClick={handleCollapsable}
-            >
-              <div className="legend__container--icon">
-                <i
-                  className="legend__icon far fa-address-card icon"
-                  alt="icono de compartir"
-                  title="Comparte tu tarjeta"
-                ></i>
-                <legend className="legend__title">Comparte</legend>
+              >
+                <FormFill handleInput={handleInput} data={data} updateAvatar={updateAvatar} avatar={avatar}/>
               </div>
-              <i
-                className={`legend__arrow fas ${
-                  collapsableShare ? "fa-chevron-down" : "fa-chevron-up"
-                }`}
-                alt="arrow"
-                title="Click to open"
-              ></i>
-            </div>
-            <div
-              className={`sharecontainer ${
-                collapsableShare ? "collapsed" : ""
-              }`}
-            >
-              <section className="share_button">
-                <button
-                  type="submit"
-                  className="share_button__item sharebuttonorange"
-                  disabled
-                >
-                  <img
-                    className="share_button__item--img"
-                    src={shareIconCard}
-                    title="icon"
-                    alt="Comparte"
-                  />
-                  Crear Tarjeta
-                </button>
-              </section>
+            </fieldset>
 
-              <section className="share_creation collapsed">
-                <div className="share_button__item--line"></div>
-                <h3 className="share_creation__title">
-                  La tarjeta ha sido creada:
-                </h3>
-                <a
-                  href="./#"
-                  target="_blank"
-                  className="share_creation__link href js-shareCreationLink"
-                  src="https://awesome-profile-card.com?id=A456DF0001"
-                >
-                  https://awesome-profile-card.com?id=A456DF0001
-                </a>
-
-                <a
-                  target="_blank"
-                  className="share_creation__twitter js-share-RRSS"
-                  href="./#"
-                >
-                  <img
-                    className="share_creation__twitter--img"
-                    src={imgShareTwitter}
-                    alt="Comparte Twitter"
-                  />
-                  Compartir en Twitter
-                </a>
-                <a
-                  className="share_creation__linkedin js-share-RRSS"
-                  href="./#"
-                  target="_blank"
-                >
-                  <img
-                    className="share_creation__linkedin--img"
-                    src={imgShareLinkedin}
-                    alt="Comparte Linkedin"
-                  />
-                  Comparte en LinkedIn
-                </a>
-                <a
-                  className="share_creation__facebook js-share-RRSS"
-                  href="./#"
-                  target="_blank"
-                >
-                  <img
-                    className="share_creation__facebook--img"
-                    src={imgShareFacebook}
-                    alt="Comparte Facebook"
-                  />
-                  Comparte en Facebook
-                </a>
-              </section>
-            </div>
-          </fieldset>
-        </form>
-      </main>
-      <footer className="page__footer">
-        <h6 className="page__footer--title">Tarjetas super molonas @2021</h6>
-        <img
-          className="page__footer--logo"
-          src={superPopLogo}
-          alt="Logo de SuperPop"
-        />
-      </footer>
+            <ShareCard
+              handleCollapsable={handleCollapsable}
+              collapsableShare={collapsableShare}
+              handleApi={handleApi}
+              dataApi={dataApi}
+              data={data}
+            />
+          </form>
+        </main>
+        <footer className="page__footer">
+          <h6 className="page__footer--title">Tarjetas super molonas @2021</h6>
+          <img
+            className="page__footer--logo"
+            src={superPopLogo}
+            alt="Logo de SuperPop"
+          />
+        </footer>
+      </Route>
     </div>
   );
 }

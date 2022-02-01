@@ -1,14 +1,18 @@
 const Palette = (props) => {
+    const handleChangeInput = (ev) => {
+        props.handleInput(ev.currentTarget.name, ev.currentTarget.value);
+    };
+
     return (
-        <label className="design__label" htmlFor="blue-green">
+        <label className="design__label" htmlFor={props.id}>
             <input
                 className="design__radio"
                 type="radio"
                 name="palette"
                 id={props.id}
                 value={props.value}
-                checked={data.palette === "1"}
-                onChange={handleInput}
+                onChange={handleChangeInput}
+                checked={props.data.palette.includes(props.value)}
             />
             <div className={`design__color design__color--${props.color1}`}></div>
             <div className={`design__color design__color--${props.color2}`}></div>
