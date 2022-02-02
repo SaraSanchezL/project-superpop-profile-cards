@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 
 //Imagenes
-import superPopLogo from "../images/superpop-logo.png";
 import FormFill from "./FormFill";
 import Preview from "./Preview";
 import Header from "./Header";
