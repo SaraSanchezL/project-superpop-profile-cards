@@ -14,6 +14,8 @@ import ShareCard from "./ShareCard";
 import Landing from "./Landing";
 
 function App() {
+  const [avatar, setAvatar] = useState('');
+
   const [data, setData] = useState(
     ls.get("localData", {
       palette: "1",
@@ -23,7 +25,7 @@ function App() {
       phone: "",
       linkedin: "",
       github: "",
-      photo: "",
+      photo: avatar,
     })
   );
 
@@ -58,10 +60,13 @@ function App() {
   const [collapsablePalette, setcollapsablePalette] = useState(false);
   const [collapsableFill, setcollapsableFill] = useState(true);
   const [collapsableShare, setcollapsableShare] = useState(true);
-  const [avatar, setAvatar] = useState('');
+  
 
   const updateAvatar = (avatar) => {
     setAvatar(avatar);
+    setData({
+      ...data,photo:avatar
+    });
   };
 
   const handleCollapsable = (ev) => {
