@@ -1,4 +1,4 @@
-# Proyecto Modulo 3 Equipo 4
+# SuperPop Profile Cards.
 
 En este proyecto hemos trabajado con un caso muy típico que se suele producir en el mundo de la programación, un trabajo que nos viene dado, con código heredado, es decir escrito por otra persona y sobre el que tenemos que trabajar. En este caso es un poco especial porque hemos trabajado con código heredado pero nuestro: el código del proyecto del segundo módulo (el generador de tarjetas interactivas).
 
